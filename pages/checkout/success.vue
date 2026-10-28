@@ -5,12 +5,12 @@
       Bestellung nicht gefunden.
       <NuxtLink to="/" class="block mt-3 text-blue-700 underline">Startseite</NuxtLink>
     </div>
-    <div v-else class="card p-8 text-center">
+    <div v-else class="card p-5 text-center sm:p-8">
       <p class="text-4xl mb-3">{{ order.status === 'paid' ? '✅' : '⏳' }}</p>
       <h1 class="text-xl font-bold" :class="order.status === 'paid' ? 'text-emerald-700' : 'text-amber-700'">
         {{ order.status === 'paid' ? 'Zahlung erfolgreich' : `Status: ${order.status}` }}
       </h1>
-      <p class="mt-2 text-slate-600">Bestellnr. <strong>{{ order.id }}</strong> · {{ order.payment }}</p>
+      <p class="mt-2 break-all text-slate-600">Bestellnr. <strong>{{ order.id }}</strong> · {{ order.payment }}</p>
       <p class="text-sm text-slate-500 mt-1">{{ order.eventTitle }} · {{ order.total }} €</p>
 
       <div class="mt-8 grid gap-4 sm:grid-cols-2">
@@ -24,7 +24,7 @@
             {{ t.code }}
           </div>
           <p class="mt-3 text-sm font-medium text-center">{{ t.label }}</p>
-          <p class="text-xs text-center text-slate-500 font-mono">{{ t.code }}</p>
+          <p class="text-center font-mono text-xs text-slate-500 break-all">{{ t.code }}</p>
           <a :href="t.pdfUrl" target="_blank" class="btn-secondary w-full mt-3 !text-xs">PDF öffnen</a>
         </div>
       </div>

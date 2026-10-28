@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="flex items-start justify-between gap-4 mb-6">
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
       <div>
         <h1 class="text-2xl font-bold">Monitoring</h1>
         <p class="text-sm text-slate-500">Failed payments, seats.io Sync-Fehler, Holds</p>
       </div>
-      <button type="button" class="btn-secondary !text-xs" :disabled="busy" @click="releaseHolds">
+      <button type="button" class="btn-secondary w-full shrink-0 sm:w-auto" :disabled="busy" @click="releaseHolds">
         Unpaid Holds freigeben
       </button>
     </div>

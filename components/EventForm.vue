@@ -1,12 +1,12 @@
 <template>
   <div>
     <NuxtLink to="/admin/events" class="text-sm text-blue-700 hover:underline">← Events</NuxtLink>
-    <h1 class="text-2xl font-bold mt-2 mb-6">
+    <h1 class="mt-2 mb-6 text-2xl font-bold break-words">
       {{ mode === 'create' ? 'Neues Event' : 'Event bearbeiten' }}
-      <span class="text-sm font-normal text-slate-400 ml-2">({{ form.type }})</span>
+      <span class="ml-2 text-sm font-normal text-slate-400">({{ form.type }})</span>
     </h1>
 
-    <form class="card p-6 grid gap-4 sm:grid-cols-2 max-w-3xl" @submit.prevent="save">
+    <form class="card grid max-w-3xl gap-4 p-4 sm:grid-cols-2 sm:p-6" @submit.prevent="save">
       <div class="sm:col-span-2">
         <label class="label">Titel *</label>
         <input v-model="form.title" required class="input" />
@@ -34,7 +34,7 @@
         <label class="label">Organizer</label>
         <input v-model="form.organizer" class="input" />
       </div>
-      <div class="flex items-center gap-4 pt-6">
+      <div class="flex flex-wrap items-center gap-4 pt-2 sm:pt-6">
         <label class="flex items-center gap-2 text-sm"><input v-model="form.active" type="checkbox" /> Active</label>
         <label class="flex items-center gap-2 text-sm"><input v-model="form.promo" type="checkbox" /> Promo</label>
       </div>
@@ -56,7 +56,7 @@
           <label class="label">Event Key</label>
           <input v-model="form.eventKey" class="input" placeholder="eventKey" />
         </div>
-        <div class="sm:col-span-2 flex gap-4 text-sm">
+        <div class="sm:col-span-2 flex flex-col gap-3 text-sm sm:flex-row sm:gap-4">
           <label class="flex items-center gap-2"><input v-model="form.hasNumericSeats" type="checkbox" /> Numeric seats</label>
           <label class="flex items-center gap-2"><input v-model="form.hasNonNumeric" type="checkbox" /> Non-numeric (GA)</label>
         </div>
@@ -64,16 +64,16 @@
 
       <div class="sm:col-span-2 border-t pt-4">
         <p class="font-semibold text-sm mb-2">Preiskategorien (JSON-einfach)</p>
-        <div v-for="(cat, i) in form.priceCategories" :key="i" class="flex gap-2 mb-2">
+        <div v-for="(cat, i) in form.priceCategories" :key="i" class="mb-2 grid gap-2 sm:grid-cols-[1fr_7rem]">
           <input v-model="cat.name" class="input" placeholder="Name" />
-          <input v-model.number="cat.price" type="number" step="0.01" class="input !w-28" placeholder="€" />
+          <input v-model.number="cat.price" type="number" step="0.01" class="input" placeholder="€" />
         </div>
         <button type="button" class="btn-secondary !text-xs" @click="form.priceCategories.push({ id: `cat-${Date.now()}`, name: 'Neu', price: 20 })">+ Kategorie</button>
       </div>
 
-      <div class="sm:col-span-2 flex gap-2 pt-2">
-        <button type="submit" class="btn-primary">Speichern</button>
-        <NuxtLink to="/admin/events" class="btn-secondary">Abbrechen</NuxtLink>
+      <div class="sm:col-span-2 flex flex-col gap-2 pt-2 sm:flex-row">
+        <button type="submit" class="btn-primary w-full sm:w-auto">Speichern</button>
+        <NuxtLink to="/admin/events" class="btn-secondary w-full sm:w-auto">Abbrechen</NuxtLink>
       </div>
     </form>
   </div>

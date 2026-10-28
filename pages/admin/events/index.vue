@@ -5,24 +5,72 @@
         <h1 class="text-2xl font-bold">Events</h1>
         <p class="text-sm text-slate-500">Combined (Chart) vs Simple (ohne Chart)</p>
       </div>
-      <div class="flex flex-wrap gap-2">
-        <NuxtLink to="/admin/events/new?type=combined" class="btn-primary !text-xs">+ Combined Event</NuxtLink>
-        <NuxtLink to="/admin/events/new?type=simple" class="btn-secondary !text-xs">+ Simple Event</NuxtLink>
-        <button type="button" class="btn-secondary !text-xs" @click="toast('GATEWAY REPORT (stub)')">GATEWAY REPORT</button>
-        <button type="button" class="btn-secondary !text-xs" @click="toast('BULK REPORT (stub)')">BULK REPORT</button>
+      <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+        <NuxtLink to="/admin/events/new?type=combined" class="btn-primary w-full sm:w-auto">+ Combined Event</NuxtLink>
+        <NuxtLink to="/admin/events/new?type=simple" class="btn-secondary w-full sm:w-auto">+ Simple Event</NuxtLink>
+        <button type="button" class="btn-secondary w-full sm:w-auto" @click="toast('GATEWAY REPORT (stub)')">GATEWAY REPORT</button>
+        <button type="button" class="btn-secondary w-full sm:w-auto" @click="toast('BULK REPORT (stub)')">BULK REPORT</button>
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-3 mb-4">
-      <input v-model="from" type="date" class="input !w-auto" />
-      <span class="self-center text-slate-400">–</span>
-      <input v-model="to" type="date" class="input !w-auto" />
-      <input v-model="q" type="search" placeholder="Titel / Stadt…" class="input !w-48" />
+    <div class="mb-4 grid gap-3 sm:grid-cols-2 lg:flex lg:flex-wrap">
+      <input v-model="from" type="date" class="input lg:w-auto" />
+      <input v-model="to" type="date" class="input lg:w-auto" />
+      <input v-model="q" type="search" placeholder="Titel / Stadt…" class="input sm:col-span-2 lg:col-span-1 lg:w-48" />
     </div>
     <p v-if="msg" class="text-sm text-emerald-700 mb-3">{{ msg }}</p>
 
-    <div class="card overflow-x-auto">
-      <table class="w-full text-sm min-w-[900px]">
+    <div class="space-y-3 md:hidden">
+      <article v-for="e in filtered" :key="e.id" class="card space-y-3 p-4">
+        <div class="flex items-start gap-3">
+          <div
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded text-xl"
+            :style="{ background: e.posterColor }"
+          >{{ e.bannerEmoji }}</div>
+          <div class="min-w-0 flex-1">
+            <p class="font-medium break-words">{{ e.title }}</p>
+            <p class="text-xs text-slate-400">
+              {{ e.city }} ·
+              <span :class="e.type === 'combined' ? 'text-blue-600' : 'text-slate-500'">
+                {{ e.type === 'combined' ? 'Combined' : 'Simple' }}
+              </span>
+            </p>
+            <p class="text-xs text-slate-500">{{ formatDate(e.date) }}</p>
+            <p class="text-xs text-slate-500">{{ e.organizer }}</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between gap-3">
+          <button
+            type="button"
+            class="relative inline-flex h-7 w-12 items-center rounded-full transition"
+            :class="e.active ? 'bg-emerald-500' : 'bg-slate-300'"
+            :aria-label="e.active ? 'Event deaktivieren' : 'Event aktivieren'"
+            @click="toggleActive(e.id)"
+          >
+            <span
+              class="inline-block h-5 w-5 transform rounded-full bg-white shadow transition"
+              :class="e.active ? 'translate-x-6' : 'translate-x-1'"
+            />
+          </button>
+          <span v-if="e.promo" class="text-xs font-bold text-amber-700">PROMO</span>
+          <span v-else class="text-xs text-slate-300">—</span>
+        </div>
+        <div class="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2">
+          <NuxtLink :to="`/admin/events/${e.id}`" class="btn-secondary w-full">Edit</NuxtLink>
+          <button type="button" class="btn-danger w-full" @click="onDelete(e.id)">Delete</button>
+          <NuxtLink :to="`/admin/events/${e.id}/manager`" class="btn-secondary w-full">Event manager</NuxtLink>
+          <a :href="`/event/${e.slug}`" target="_blank" class="btn-secondary w-full">Live link</a>
+          <button type="button" class="btn-secondary w-full" @click="toast(`Export orders: ${e.title}`)">Export orders</button>
+          <button type="button" class="btn-secondary w-full" @click="toast(`Export customers: ${e.title}`)">Export customers</button>
+          <button type="button" class="btn-secondary w-full" @click="toast(`Tickets scanned: ${e.title}`)">Tickets scanned</button>
+          <button type="button" class="btn-secondary w-full" @click="toast(`Export QR: ${e.title}`)">Export QR codes</button>
+        </div>
+      </article>
+      <p v-if="!filtered.length" class="card p-6 text-center text-sm text-slate-400">Keine Events.</p>
+    </div>
+
+    <div class="card hidden overflow-x-auto md:block">
+      <table class="w-full min-w-[900px] text-sm">
         <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
           <tr>
             <th class="px-3 py-2">Active</th>

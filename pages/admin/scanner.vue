@@ -2,10 +2,10 @@
   <div class="max-w-xl">
     <h1 class="text-2xl font-bold mb-1">QR Scanner</h1>
     <p class="text-sm text-slate-500 mb-2">Code manuell eingeben oder Kamera (wenn erlaubt).</p>
-    <p class="text-xs text-slate-400 mb-6">
+    <p class="mb-6 text-sm text-slate-400 break-words">
       PWA: auf dem Handy „Zum Home-Bildschirm“ / Install.
-      Manifest: <code class="bg-slate-100 px-1 rounded">/manifest.webmanifest</code>
-      · SW: <code class="bg-slate-100 px-1 rounded">/sw.js</code>
+      Manifest: <code class="rounded bg-slate-100 px-1">/manifest.webmanifest</code>
+      · SW: <code class="rounded bg-slate-100 px-1">/sw.js</code>
     </p>
 
     <div class="card p-5 space-y-4">
@@ -25,9 +25,9 @@
       <div class="border-t pt-4">
         <p class="text-xs font-medium text-slate-500 mb-2">Kamera (BarcodeDetector / getUserMedia)</p>
         <video ref="videoEl" class="w-full rounded-lg bg-black aspect-video" playsinline muted />
-        <div class="flex gap-2 mt-2">
-          <button type="button" class="btn-secondary !text-xs" @click="startCam">Kamera starten</button>
-          <button type="button" class="btn-secondary !text-xs" @click="stopCam">Stop</button>
+        <div class="mt-2 flex flex-col gap-2 sm:flex-row">
+          <button type="button" class="btn-secondary w-full sm:w-auto" @click="startCam">Kamera starten</button>
+          <button type="button" class="btn-secondary w-full sm:w-auto" @click="stopCam">Stop</button>
         </div>
         <p v-if="camMsg" class="text-xs text-slate-400 mt-2">{{ camMsg }}</p>
       </div>
@@ -39,7 +39,7 @@
       :class="result.ok ? 'border-emerald-300 bg-emerald-50' : 'border-red-300 bg-red-50'"
     >
       <p class="font-semibold" :class="result.ok ? 'text-emerald-800' : 'text-red-800'">{{ result.message }}</p>
-      <pre v-if="result.ticket" class="mt-2 text-xs overflow-auto">{{ JSON.stringify(result.ticket, null, 2) }}</pre>
+      <pre v-if="result.ticket" class="mt-2 max-w-full overflow-x-auto text-xs break-all whitespace-pre-wrap">{{ JSON.stringify(result.ticket, null, 2) }}</pre>
     </div>
   </div>
 </template>

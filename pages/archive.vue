@@ -1,16 +1,16 @@
 <template>
   <div class="mx-auto max-w-6xl px-4 py-10">
     <h1 class="text-2xl font-bold mb-6">Alle Events</h1>
-    <div class="flex flex-wrap gap-3 mb-8">
-      <select v-model="city" class="input !w-auto">
+    <div class="mb-8 grid gap-3 sm:flex sm:flex-wrap sm:items-center">
+      <select v-model="city" class="input sm:w-auto">
         <option value="">Alle Städte</option>
         <option v-for="c in cities()" :key="c" :value="c">{{ c }}</option>
       </select>
-      <select v-model="tag" class="input !w-auto">
+      <select v-model="tag" class="input sm:w-auto">
         <option value="">Alle Tags</option>
         <option v-for="t in allTags" :key="t" :value="t">{{ t }}</option>
       </select>
-      <label class="flex items-center gap-2 text-sm text-slate-600">
+      <label class="flex min-h-11 items-center gap-2 text-sm text-slate-600">
         <input v-model="onlyActive" type="checkbox" class="rounded" />
         Nur aktive
       </label>

@@ -9,7 +9,7 @@
     <div v-if="loadError" class="mb-4 rounded-lg bg-red-50 text-red-700 text-sm px-4 py-3">{{ loadError }}</div>
     <div v-if="savedMsg" class="mb-4 rounded-lg bg-emerald-50 text-emerald-800 text-sm px-4 py-3">{{ savedMsg }}</div>
 
-    <div v-if="ready" class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6 text-xs">
+    <div v-if="ready" class="mb-6 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
       <div class="card px-3 py-2" :class="ready.seatsioChart ? 'border-emerald-300' : 'border-amber-200'">
         seats.io Chart: <strong>{{ ready.seatsioChart ? 'OK' : 'fehlt' }}</strong>
       </div>
@@ -35,14 +35,14 @@
         <h2 class="font-semibold">seats.io</h2>
         <p class="text-xs text-slate-500">Paste keys from seats.io dashboard. Chart Key per Combined event.</p>
         <div>
-          <label class="label flex justify-between">
+          <label class="label !flex items-start justify-between gap-3">
             <span>Workspace Public Key</span>
             <StatusDot :on="!!form.seatsio.workspacePublicKeySet" />
           </label>
           <input v-model="form.seatsio.workspacePublicKey" class="input font-mono text-xs" placeholder="pub-…" autocomplete="off" />
         </div>
         <div>
-          <label class="label flex justify-between">
+          <label class="label !flex items-start justify-between gap-3">
             <span>Secret Key</span>
             <StatusDot :on="!!form.seatsio.secretKeySet" />
           </label>
@@ -63,15 +63,15 @@
         <h2 class="font-semibold">Stripe</h2>
         <p class="text-xs text-slate-500">Checkout + Webhook. Secret nie an den Client.</p>
         <div>
-          <label class="label flex justify-between"><span>Publishable Key</span><StatusDot :on="!!form.stripe.publishableKeySet" /></label>
+          <label class="label !flex items-start justify-between gap-3"><span>Publishable Key</span><StatusDot :on="!!form.stripe.publishableKeySet" /></label>
           <input v-model="form.stripe.publishableKey" class="input font-mono text-xs" placeholder="pk_test_…" autocomplete="off" />
         </div>
         <div>
-          <label class="label flex justify-between"><span>Secret Key</span><StatusDot :on="!!form.stripe.secretKeySet" /></label>
+          <label class="label !flex items-start justify-between gap-3"><span>Secret Key</span><StatusDot :on="!!form.stripe.secretKeySet" /></label>
           <input v-model="form.stripe.secretKey" class="input font-mono text-xs" type="password" placeholder="••••••••" autocomplete="new-password" />
         </div>
         <div>
-          <label class="label flex justify-between"><span>Webhook Secret</span><StatusDot :on="!!form.stripe.webhookSecretSet" /></label>
+          <label class="label !flex items-start justify-between gap-3"><span>Webhook Secret</span><StatusDot :on="!!form.stripe.webhookSecretSet" /></label>
           <input v-model="form.stripe.webhookSecret" class="input font-mono text-xs" type="password" placeholder="whsec_…" autocomplete="new-password" />
           <p class="text-xs text-slate-400 mt-1">Endpoint: <code class="bg-slate-100 px-1 rounded">POST /api/checkout/webhook</code></p>
         </div>
@@ -123,7 +123,7 @@
               <input v-model="form.email.smtpUser" class="input font-mono text-xs" autocomplete="off" />
             </div>
             <div>
-              <label class="label flex justify-between"><span>Password</span><StatusDot :on="!!form.email.smtpPassSet" /></label>
+              <label class="label !flex items-start justify-between gap-3"><span>Password</span><StatusDot :on="!!form.email.smtpPassSet" /></label>
               <input v-model="form.email.smtpPass" type="password" class="input font-mono text-xs" autocomplete="new-password" />
             </div>
           </div>
@@ -132,7 +132,7 @@
           </label>
         </template>
         <div v-if="form.email.provider === 'resend'">
-          <label class="label flex justify-between"><span>Resend API Key</span><StatusDot :on="!!form.email.resendApiKeySet" /></label>
+          <label class="label !flex items-start justify-between gap-3"><span>Resend API Key</span><StatusDot :on="!!form.email.resendApiKeySet" /></label>
           <input v-model="form.email.resendApiKey" type="password" class="input font-mono text-xs" placeholder="re_…" autocomplete="new-password" />
         </div>
       </section>
@@ -149,7 +149,7 @@
           <input v-model="form.otpVpos.merchantId" class="input font-mono text-xs" autocomplete="off" />
         </div>
         <div>
-          <label class="label flex justify-between"><span>API Key</span><StatusDot :on="!!form.otpVpos.apiKeySet" /></label>
+          <label class="label !flex items-start justify-between gap-3"><span>API Key</span><StatusDot :on="!!form.otpVpos.apiKeySet" /></label>
           <input v-model="form.otpVpos.apiKey" class="input font-mono text-xs" type="password" autocomplete="new-password" />
         </div>
         <div>
@@ -239,9 +239,9 @@
         </div>
       </section>
 
-      <div class="flex gap-2">
-        <button type="submit" class="btn-primary" :disabled="saving">{{ saving ? 'Speichern…' : 'Speichern' }}</button>
-        <button type="button" class="btn-secondary" :disabled="loading" @click="load">Neu laden</button>
+      <div class="flex flex-col gap-2 sm:flex-row">
+        <button type="submit" class="btn-primary w-full sm:w-auto" :disabled="saving">{{ saving ? 'Speichern…' : 'Speichern' }}</button>
+        <button type="button" class="btn-secondary w-full sm:w-auto" :disabled="loading" @click="load">Neu laden</button>
       </div>
       <p v-if="form.updatedAt" class="text-xs text-slate-400">Zuletzt: {{ formatAt(form.updatedAt) }}</p>
     </form>

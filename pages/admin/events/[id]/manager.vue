@@ -2,7 +2,7 @@
   <div v-if="event">
     <div class="mb-6">
       <NuxtLink to="/admin/events" class="text-sm text-blue-700 hover:underline">← Events</NuxtLink>
-      <h1 class="text-2xl font-bold mt-2">Event manager — {{ event.title }}</h1>
+      <h1 class="mt-2 text-2xl font-bold break-words">Event manager — {{ event.title }}</h1>
       <p class="text-sm text-slate-500">Ops für dieses Event (Stubs)</p>
     </div>
     <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">

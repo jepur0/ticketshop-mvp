@@ -3,7 +3,15 @@
     <h1 class="text-2xl font-bold mb-1">Users</h1>
     <p class="text-sm text-slate-500 mb-6">SQLite users (bcrypt). Seed: admin / scanner / client @ticketshop.local</p>
     <div v-if="error" class="mb-4 text-sm text-red-600">{{ error }}</div>
-    <div class="card overflow-auto">
+    <div class="space-y-3 md:hidden">
+      <article v-for="u in users" :key="u.id" class="card space-y-1 p-4 text-sm">
+        <p class="font-mono text-xs break-all">{{ u.email }}</p>
+        <p>{{ u.name }}</p>
+        <p><span class="rounded bg-slate-100 px-2 py-0.5 text-xs">{{ u.role }}</span></p>
+        <p class="text-xs text-slate-500">{{ formatAt(u.created_at) }}</p>
+      </article>
+    </div>
+    <div class="card hidden overflow-x-auto md:block">
       <table class="min-w-full text-sm">
         <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
           <tr>

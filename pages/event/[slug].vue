@@ -1,19 +1,29 @@
 <template>
-  <div v-if="event" class="mx-auto max-w-6xl px-4 py-8">
+  <div v-if="event" class="mx-auto max-w-6xl px-4 py-6 sm:py-8">
+    <div
+      v-if="eventItems.length"
+      class="sticky top-[61px] z-30 mb-4 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm sm:top-[69px] lg:hidden"
+    >
+      <div class="min-w-0 flex-1">
+        <p class="text-xs text-slate-500">{{ eventItems.length }} {{ eventItems.length === 1 ? 'Ticket' : 'Tickets' }}</p>
+        <p class="font-semibold">{{ eventTotal }} €</p>
+      </div>
+      <NuxtLink to="/checkout" class="btn-primary shrink-0">Zur Kasse</NuxtLink>
+    </div>
     <div class="grid gap-8 lg:grid-cols-[1fr_320px]">
-      <div>
+      <div class="min-w-0">
         <div
-          class="rounded-2xl h-48 sm:h-56 flex items-center justify-center text-7xl mb-6"
+          class="rounded-2xl h-40 sm:h-56 flex items-center justify-center text-6xl sm:text-7xl mb-6"
           :style="{ background: event.posterColor }"
         >
           {{ event.bannerEmoji }}
         </div>
-        <p class="text-sm font-medium text-blue-700 mb-1">{{ event.city }} · {{ event.venue }}</p>
-        <h1 class="text-3xl font-bold text-slate-900">{{ event.title }}</h1>
-        <p class="text-slate-500 mt-1">{{ event.subtitle }}</p>
-        <p class="mt-3 text-sm text-slate-600">
-          {{ formatDate(event.date) }}
-          <a v-if="event.venueMapsUrl" :href="event.venueMapsUrl" target="_blank" class="ml-2 text-blue-700 underline">Karte</a>
+        <p class="text-sm font-medium text-blue-700 mb-1 break-words">{{ event.city }} · {{ event.venue }}</p>
+        <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 break-words">{{ event.title }}</h1>
+        <p class="text-slate-500 mt-1 break-words">{{ event.subtitle }}</p>
+        <p class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-600">
+          <span>{{ formatDate(event.date) }}</span>
+          <a v-if="event.venueMapsUrl" :href="event.venueMapsUrl" target="_blank" class="inline-flex min-h-11 items-center text-blue-700 underline sm:min-h-0">Karte</a>
         </p>
         <p class="mt-6 text-slate-700 leading-relaxed whitespace-pre-line">{{ event.description }}</p>
 
@@ -55,11 +65,16 @@
         <div class="card p-5">
           <h2 class="font-semibold mb-3">Warenkorb</h2>
           <p v-if="!eventItems.length" class="text-sm text-slate-400">Noch keine Tickets gewählt.</p>
-          <ul v-else class="space-y-2 mb-4">
-            <li v-for="(item, i) in eventItems" :key="i" class="flex justify-between gap-2 text-sm border-b border-slate-100 pb-2">
-              <span>{{ item.label }}</span>
-              <button type="button" class="text-xs text-red-500" @click="removeFromEvent(item)">✕</button>
-              <span class="font-medium shrink-0">{{ item.price }} €</span>
+          <ul v-else class="mb-4 space-y-2">
+            <li v-for="(item, i) in eventItems" :key="i" class="flex items-center gap-2 border-b border-slate-100 pb-2 text-sm">
+              <span class="min-w-0 flex-1 break-words">{{ item.label }}</span>
+              <span class="shrink-0 font-medium">{{ item.price }} €</span>
+              <button
+                type="button"
+                class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-red-600 hover:bg-red-50"
+                :aria-label="`${item.label} entfernen`"
+                @click="removeFromEvent(item)"
+              >✕</button>
             </li>
           </ul>
           <div v-if="eventItems.length" class="flex justify-between font-semibold mb-2">

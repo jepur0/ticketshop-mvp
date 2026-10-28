@@ -32,7 +32,18 @@
     <p v-if="opMsg" class="text-sm text-emerald-700 mb-4">{{ opMsg }}</p>
 
     <h2 class="text-lg font-semibold mb-3">Letzte Bestellungen</h2>
-    <div class="card overflow-x-auto">
+    <div class="space-y-3 md:hidden">
+      <article v-for="o in recentOrders" :key="o.id" class="card space-y-1 p-4 text-sm">
+        <div class="flex items-start justify-between gap-3">
+          <p class="font-mono text-xs break-all">{{ o.id }}</p>
+          <StatusBadge :status="o.status" />
+        </div>
+        <p class="break-words">{{ o.eventTitle }}</p>
+        <p>{{ o.customer?.name }}</p>
+        <p class="text-right font-medium">{{ o.total }} €</p>
+      </article>
+    </div>
+    <div class="card hidden overflow-x-auto md:block">
       <table class="w-full text-sm">
         <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
           <tr>

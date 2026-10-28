@@ -1,9 +1,5 @@
 <template>
-  <div class="rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-4">
-    <div class="flex items-center justify-between mb-3">
-      <p class="text-sm font-semibold text-slate-700">Sitzplan (seats.io Placeholder)</p>
-      <span class="text-xs text-slate-400">Hold {{ holdMinutes }} Min.</span>
-    </div>
+  <div class="rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-3 sm:p-4">
     <!--
       REAL seats.io embed:
       1. Load https://cdn.seats.io/chart.js
@@ -18,19 +14,19 @@
     -->
     <div
       id="chart"
-      class="relative min-h-[280px] rounded-lg bg-white border border-slate-200 flex flex-col items-center justify-center gap-3 p-6 text-center"
+      class="relative flex min-h-[280px] flex-col items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white p-4 text-center sm:p-6"
     >
       <p class="text-4xl">{{ emoji }}</p>
-      <p class="text-sm text-slate-600 max-w-md">
-        Hier erscheint der seats.io Chart (<code class="text-xs bg-slate-100 px-1 rounded">{{ chartKey || 'chartKey' }}</code> /
-        Event <code class="text-xs bg-slate-100 px-1 rounded">{{ eventKey || 'eventKey' }}</code>).
+      <p class="max-w-md text-sm text-slate-600 break-words">
+        Hier erscheint der seats.io Chart (<code class="break-all rounded bg-slate-100 px-1 text-xs">{{ chartKey || 'chartKey' }}</code> /
+        Event <code class="break-all rounded bg-slate-100 px-1 text-xs">{{ eventKey || 'eventKey' }}</code>).
       </p>
-      <div v-if="categories.length" class="flex flex-wrap justify-center gap-2 mt-2">
+      <div v-if="categories.length" class="mt-2 flex w-full flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
         <button
           v-for="cat in categories"
           :key="cat.id"
           type="button"
-          class="btn-secondary !py-1.5 !px-3 text-xs"
+          class="btn-secondary w-full sm:w-auto"
           @click="$emit('select-category', cat)"
         >
           + {{ cat.name }} ({{ cat.price }} €)

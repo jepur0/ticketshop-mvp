@@ -5,13 +5,13 @@
 
     <div v-if="data?.connect" class="card p-4 mb-6 text-sm">
       <p class="font-medium mb-1">Stripe Connect</p>
-      <p class="text-slate-600">
+      <p class="break-words text-slate-600">
         Status:
         <strong :class="data.connect.enabled ? 'text-emerald-700' : 'text-slate-500'">
           {{ data.connect.enabled ? 'enabled (skeleton)' : 'off' }}
         </strong>
-        · Platform: <code class="text-xs">{{ data.connect.platformAccountId || '—' }}</code>
-        · Connected: <code class="text-xs">{{ data.connect.connectedAccountId || '—' }}</code>
+        · Platform: <code class="break-all text-xs">{{ data.connect.platformAccountId || '—' }}</code>
+        · Connected: <code class="break-all text-xs">{{ data.connect.connectedAccountId || '—' }}</code>
       </p>
       <p class="text-xs text-slate-400 mt-2">Configure IDs under Admin → Settings → Stripe Connect.</p>
     </div>
@@ -35,7 +35,16 @@
       </div>
     </div>
 
-    <div class="card overflow-auto">
+    <div class="space-y-3 md:hidden">
+      <article v-for="r in data?.rows || []" :key="r.orderId" class="card space-y-1 p-4 text-sm">
+        <p class="font-mono text-xs break-all">{{ r.orderId }}</p>
+        <p class="font-medium break-words">{{ r.eventTitle }}</p>
+        <p>Total {{ r.total }} · Platform {{ r.commission }} · Organizer {{ r.organizer }}</p>
+        <p class="text-xs text-slate-500">{{ formatAt(r.createdAt) }}</p>
+      </article>
+      <p v-if="!data?.rows?.length" class="card p-6 text-center text-sm text-slate-400">Noch keine bezahlten Orders.</p>
+    </div>
+    <div class="card hidden overflow-x-auto md:block">
       <table class="min-w-full text-sm">
         <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
           <tr>

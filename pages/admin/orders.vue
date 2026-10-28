@@ -1,10 +1,24 @@
 <template>
   <div>
-    <div class="flex items-center justify-between mb-6">
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <h1 class="text-2xl font-bold">Orders</h1>
-      <button type="button" class="btn-secondary !text-xs" @click="refresh()">Aktualisieren</button>
+      <button type="button" class="btn-secondary w-full sm:w-auto" @click="refresh()">Aktualisieren</button>
     </div>
-    <div class="card overflow-x-auto">
+    <div class="space-y-3 md:hidden">
+      <article v-for="o in list" :key="o.id" class="card space-y-1 p-4 text-sm">
+        <div class="flex items-start justify-between gap-3">
+          <p class="font-mono text-xs break-all">{{ o.id }}</p>
+          <StatusBadge :status="o.status" />
+        </div>
+        <p class="font-medium break-words">{{ o.eventTitle }}</p>
+        <p>{{ o.customer?.name }}</p>
+        <p class="break-all text-slate-400">{{ o.customer?.email }}</p>
+        <p class="text-slate-500">{{ formatDate(o.createdAt) }} · {{ o.payment }}</p>
+        <p class="font-medium">{{ o.total }} €</p>
+      </article>
+      <p v-if="!list.length" class="card p-6 text-center text-sm text-slate-400">Keine Orders.</p>
+    </div>
+    <div class="card hidden overflow-x-auto md:block">
       <table class="w-full text-sm">
         <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
           <tr>

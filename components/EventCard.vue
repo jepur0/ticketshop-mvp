@@ -8,7 +8,7 @@
     </div>
     <div class="p-4">
       <div class="flex items-start justify-between gap-2">
-        <h3 class="font-semibold text-slate-900 group-hover:text-blue-700 leading-snug">{{ event.title }}</h3>
+        <h3 class="font-semibold leading-snug text-slate-900 break-words group-hover:text-blue-700">{{ event.title }}</h3>
         <span v-if="event.promo" class="shrink-0 text-[10px] font-bold uppercase bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Promo</span>
       </div>
       <p class="mt-1 text-sm text-slate-500">{{ event.city }} · {{ formatDate(event.date) }}</p>

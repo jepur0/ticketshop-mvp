@@ -37,9 +37,9 @@
           <p class="text-sm font-medium">{{ o.eventTitle }}</p>
           <p class="text-xs text-slate-400 font-mono">{{ o.orderId }}</p>
           <ul class="mt-2 space-y-2">
-            <li v-for="t in o.tickets" :key="t.code" class="flex items-center justify-between text-sm gap-2">
-              <span>{{ t.label }} <code class="text-xs bg-slate-100 px-1 rounded">{{ t.code }}</code></span>
-              <a :href="t.pdfUrl" target="_blank" class="text-blue-700 text-xs underline">PDF</a>
+            <li v-for="t in o.tickets" :key="t.code" class="flex flex-col gap-2 text-sm sm:flex-row sm:items-center sm:justify-between">
+              <span class="min-w-0 break-words">{{ t.label }} <code class="break-all rounded bg-slate-100 px-1 text-xs">{{ t.code }}</code></span>
+              <a :href="t.pdfUrl" target="_blank" class="btn-secondary w-full sm:w-auto">PDF</a>
             </li>
           </ul>
         </div>
