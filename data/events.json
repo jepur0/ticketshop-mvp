@@ -1,0 +1,165 @@
+[
+  {
+    "id": "evt-001",
+    "slug": "standup-nacht-frankfurt",
+    "title": "Stand-up Nacht Frankfurt",
+    "subtitle": "Comedy-Abend auf BKS/DE",
+    "city": "Frankfurt",
+    "venue": "Saal am Main, Hanauer Landstr. 12",
+    "venueMapsUrl": "https://maps.google.com/?q=Frankfurt",
+    "date": "2026-11-15T20:00:00+01:00",
+    "endDate": "2026-11-15T23:00:00+01:00",
+    "type": "combined",
+    "active": true,
+    "promo": false,
+    "organizer": "WAW Media Demo",
+    "posterColor": "#1e3a5f",
+    "bannerEmoji": "🎤",
+    "description": "Ein Abend voller Stand-up Comedy. Türkische und bosnische Acts, gemischt mit lokalem Humor. Bar und Garderobe vor Ort.",
+    "tags": ["Comedy", "Stand-up"],
+    "priceCategories": [
+      { "id": "cat-a", "name": "Sitzplatz A", "price": 35 },
+      { "id": "cat-b", "name": "Sitzplatz B", "price": 28 },
+      { "id": "cat-c", "name": "Stehplatz", "price": 18 }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "demo-frankfurt-standup",
+      "chartKey": "demo-chart-saal-main",
+      "hasNumericSeats": true,
+      "hasNonNumeric": true
+    },
+    "sold": 142,
+    "capacity": 400
+  },
+  {
+    "id": "evt-002",
+    "slug": "balkan-beats-muenchen",
+    "title": "Balkan Beats Live — München",
+    "subtitle": "Konzert & Dance Night",
+    "city": "München",
+    "venue": "Kulturhalle Süd, Rosenheimer Str. 90",
+    "venueMapsUrl": "https://maps.google.com/?q=München",
+    "date": "2026-12-06T21:00:00+01:00",
+    "endDate": "2026-12-07T02:00:00+01:00",
+    "type": "combined",
+    "active": true,
+    "promo": true,
+    "organizer": "WAW Media Demo",
+    "posterColor": "#7c2d12",
+    "bannerEmoji": "🎶",
+    "description": "Live-Band, DJ und offene Tanzfläche. Early-Bird bis Ende Oktober.",
+    "tags": ["Konzert", "Party"],
+    "priceCategories": [
+      { "id": "cat-vip", "name": "VIP Tisch", "price": 65 },
+      { "id": "cat-std", "name": "Standard", "price": 32 },
+      { "id": "cat-door", "name": "Last Minute", "price": 40 }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "demo-muenchen-beats",
+      "chartKey": "demo-chart-kulturhalle",
+      "hasNumericSeats": true,
+      "hasNonNumeric": true
+    },
+    "sold": 289,
+    "capacity": 600
+  },
+  {
+    "id": "evt-003",
+    "slug": "akustik-abend-stuttgart",
+    "title": "Akustik Abend Stuttgart",
+    "subtitle": "Unplugged Session",
+    "city": "Stuttgart",
+    "venue": "Kellerbühne West, Königstr. 44",
+    "venueMapsUrl": "https://maps.google.com/?q=Stuttgart",
+    "date": "2026-11-28T19:30:00+01:00",
+    "endDate": "2026-11-28T22:30:00+01:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "WAW Media Demo",
+    "posterColor": "#365314",
+    "bannerEmoji": "🎸",
+    "description": "Intimes Unplugged-Konzert. Keine Sitzplatzkarte — nur Kontingent-Tickets.",
+    "tags": ["Konzert", "Akustik"],
+    "priceCategories": [
+      { "id": "cat-reg", "name": "Ticket", "price": 22 },
+      { "id": "cat-red", "name": "Ermäßigt", "price": 16 }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 67,
+    "capacity": 120
+  },
+  {
+    "id": "evt-004",
+    "slug": "new-year-gala-frankfurt",
+    "title": "New Year Gala Frankfurt",
+    "subtitle": "Silvester mit Dinner",
+    "city": "Frankfurt",
+    "venue": "Palais am Mainufer",
+    "venueMapsUrl": "https://maps.google.com/?q=Frankfurt+Main",
+    "date": "2026-12-31T20:00:00+01:00",
+    "endDate": "2027-01-01T03:00:00+01:00",
+    "type": "combined",
+    "active": true,
+    "promo": true,
+    "organizer": "WAW Media Demo",
+    "posterColor": "#4c1d95",
+    "bannerEmoji": "🥂",
+    "description": "Silvester-Gala mit 3-Gänge-Menü, Live-Band und Mitternachtsshow. Tischplatzierung über seats.io.",
+    "tags": ["Gala", "Silvester"],
+    "priceCategories": [
+      { "id": "cat-gold", "name": "Gold Tisch (2 Pers.)", "price": 180 },
+      { "id": "cat-silber", "name": "Silber Tisch (2 Pers.)", "price": 140 },
+      { "id": "cat-einzeln", "name": "Einzelticket", "price": 85 }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "demo-nye-frankfurt",
+      "chartKey": "demo-chart-palais",
+      "hasNumericSeats": true,
+      "hasNonNumeric": false
+    },
+    "sold": 54,
+    "capacity": 250
+  },
+  {
+    "id": "evt-005",
+    "slug": "kinder-theater-nuernberg",
+    "title": "Kindertheater Nachmittag",
+    "subtitle": "Familie & Kinder 4+",
+    "city": "Nürnberg",
+    "venue": "Stadttheater Nebenraum",
+    "venueMapsUrl": "https://maps.google.com/?q=Nürnberg",
+    "date": "2026-11-08T15:00:00+01:00",
+    "endDate": "2026-11-08T17:00:00+01:00",
+    "type": "simple",
+    "active": false,
+    "promo": false,
+    "organizer": "WAW Media Demo",
+    "posterColor": "#0e7490",
+    "bannerEmoji": "🎭",
+    "description": "Märchenstück für Familien. Einfache Tickets ohne Sitzplan (Entwurf — noch nicht aktiv).",
+    "tags": ["Theater", "Familie"],
+    "priceCategories": [
+      { "id": "cat-adult", "name": "Erwachsene", "price": 14 },
+      { "id": "cat-child", "name": "Kind", "price": 8 }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 80
+  }
+]

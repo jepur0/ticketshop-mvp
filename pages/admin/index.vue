@@ -1,0 +1,104 @@
+<template>
+  <div>
+    <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+      <div v-for="s in stats" :key="s.label" class="card p-4">
+        <p class="text-xs uppercase tracking-wide text-slate-400">{{ s.label }}</p>
+        <p class="text-2xl font-bold mt-1">{{ s.value }}</p>
+      </div>
+    </div>
+
+    <div class="card p-4 mb-8 text-sm text-slate-600 flex flex-wrap gap-3 items-center">
+      <span class="font-medium text-slate-800">Schnellzugriff:</span>
+      <NuxtLink to="/admin/settings" class="text-blue-700 underline">Settings (API keys)</NuxtLink>
+      <NuxtLink to="/admin/monitoring" class="text-blue-700 underline">Monitoring</NuxtLink>
+      <NuxtLink to="/admin/scanner" class="text-blue-700 underline">Scanner</NuxtLink>
+      <NuxtLink to="/admin/payouts" class="text-blue-700 underline">Payouts</NuxtLink>
+    </div>
+
+    <h2 class="text-lg font-semibold mb-3">Ops-Tools</h2>
+    <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+      <button
+        v-for="op in ops"
+        :key="op"
+        type="button"
+        class="card px-4 py-3 text-left text-sm hover:border-blue-300 hover:bg-blue-50 transition"
+        @click="runOp(op)"
+      >
+        {{ op }}
+        <span class="block text-xs text-slate-400 mt-0.5">{{ op.includes('Release') || op.includes('expired') ? 'Live' : 'Stub' }}</span>
+      </button>
+    </div>
+    <p v-if="opMsg" class="text-sm text-emerald-700 mb-4">{{ opMsg }}</p>
+
+    <h2 class="text-lg font-semibold mb-3">Letzte Bestellungen</h2>
+    <div class="card overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Event</th>
+            <th class="px-4 py-2">Kunde</th>
+            <th class="px-4 py-2">Status</th>
+            <th class="px-4 py-2 text-right">Summe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="o in recentOrders" :key="o.id" class="border-t border-slate-100">
+            <td class="px-4 py-2 font-mono text-xs">{{ o.id }}</td>
+            <td class="px-4 py-2">{{ o.eventTitle }}</td>
+            <td class="px-4 py-2">{{ o.customer?.name }}</td>
+            <td class="px-4 py-2"><StatusBadge :status="o.status" /></td>
+            <td class="px-4 py-2 text-right font-medium">{{ o.total }} €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ layout: 'admin', middleware: 'auth' })
+
+const { events } = useEvents()
+const { data: ordersData, refresh } = await useFetch('/api/admin/orders')
+const recentOrders = computed(() => ((ordersData.value as any)?.orders || []).slice(0, 8))
+
+const stats = computed(() => {
+  const orders = (ordersData.value as any)?.orders || []
+  const paid = orders.filter((o: any) => o.status === 'paid')
+  return [
+    { label: 'Events aktiv', value: events.value.filter((e) => e.active).length },
+    { label: 'Bestellungen', value: orders.length },
+    { label: 'Umsatz', value: `${paid.reduce((s: number, o: any) => s + (o.total || 0), 0)} €` },
+    { label: 'Tickets verkauft (seed)', value: events.value.reduce((s, e) => s + e.sold, 0) }
+  ]
+})
+
+const ops = [
+  'Find / Release booked but not paid',
+  'Mark expired & release seats',
+  'Check duplicate seats',
+  'Generate payspot tickets from PDF',
+  'Rebook paid orders',
+  'Optimize DB',
+  'Send event reminder',
+  'Send daily report to clients',
+  'Sync OTP VPOS and seats.io',
+  'Optimize tickets'
+]
+
+const opMsg = ref('')
+async function runOp(name: string) {
+  if (name.includes('Release') || name.includes('expired')) {
+    const res = await $fetch<any>('/api/holds/release-expired', {
+      method: 'POST',
+      body: { forceAll: name.includes('Release') }
+    })
+    opMsg.value = `✓ Holds: expired=${res.expired}, forced=${res.forced}`
+    await refresh()
+    return
+  }
+  opMsg.value = `✓ „${name}“ ausgeführt (Demo-Stub).`
+}
+</script>

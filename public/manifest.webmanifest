@@ -1,0 +1,25 @@
+{
+  "name": "TicketShop Scanner",
+  "short_name": "TS Scanner",
+  "description": "QR door scanner for TicketShop",
+  "start_url": "/admin/scanner",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1d4ed8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/scanner-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/scanner-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

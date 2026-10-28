@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ticketshop-mvp
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm ci && npm run build
+    startCommand: node .output/server/index.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: NODE_ENV
+        value: production
+      - key: NITRO_HOST
+        value: "0.0.0.0"

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "ord-1001",
+    "eventId": "evt-001",
+    "eventTitle": "Stand-up Nacht Frankfurt",
+    "createdAt": "2026-10-20T14:22:00+02:00",
+    "status": "paid",
+    "payment": "OTP VPOS",
+    "customer": { "name": "Ana Petrović", "email": "ana.p@example.com", "phone": "+49 170 1112233" },
+    "items": [{ "label": "Sitzplatz A — Reihe 5 Platz 12", "price": 35, "seatId": "5-12" }],
+    "total": 35,
+    "fees": 2.5
+  },
+  {
+    "id": "ord-1002",
+    "eventId": "evt-002",
+    "eventTitle": "Balkan Beats Live — München",
+    "createdAt": "2026-10-22T09:10:00+02:00",
+    "status": "paid",
+    "payment": "OTP VPOS",
+    "customer": { "name": "Marko Jovanović", "email": "marko.j@example.com", "phone": "+49 151 9988776" },
+    "items": [
+      { "label": "VIP Tisch", "price": 65, "seatId": "VIP-3" },
+      { "label": "VIP Tisch", "price": 65, "seatId": "VIP-3b" }
+    ],
+    "total": 130,
+    "fees": 5
+  },
+  {
+    "id": "ord-1003",
+    "eventId": "evt-003",
+    "eventTitle": "Akustik Abend Stuttgart",
+    "createdAt": "2026-10-25T18:40:00+02:00",
+    "status": "pending",
+    "payment": "OTP VPOS",
+    "customer": { "name": "Leila Hassan", "email": "leila.h@example.com", "phone": "+49 160 5544332" },
+    "items": [{ "label": "Ticket", "price": 22, "seatId": null }],
+    "total": 22,
+    "fees": 1.5
+  },
+  {
+    "id": "ord-1004",
+    "eventId": "evt-001",
+    "eventTitle": "Stand-up Nacht Frankfurt",
+    "createdAt": "2026-10-26T11:05:00+01:00",
+    "status": "refunded",
+    "payment": "Stripe",
+    "customer": { "name": "Stefan Müller", "email": "stefan.m@example.com", "phone": "+49 176 3344556" },
+    "items": [{ "label": "Sitzplatz B — Reihe 12 Platz 4", "price": 28, "seatId": "12-4" }],
+    "total": 28,
+    "fees": 2
+  }
+]
