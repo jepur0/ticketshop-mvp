@@ -24,7 +24,7 @@
             Warenkorb
             <span
               v-if="count"
-              class="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-[10px] font-semibold text-white"
+              class="absolute -top-1 right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-[10px] font-semibold text-white"
             >{{ count }}</span>
           </NuxtLink>
           <button

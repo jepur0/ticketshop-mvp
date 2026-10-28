@@ -52,7 +52,7 @@
                 v-for="cat in event.priceCategories"
                 :key="cat.id"
                 type="button"
-                class="w-full flex items-center justify-between btn-secondary"
+                class="btn-secondary w-full !justify-between"
                 @click="onSelectCategory(cat)"
               >
                 <span>{{ cat.name }}</span>
