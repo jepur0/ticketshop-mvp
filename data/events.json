@@ -1,156 +1,42 @@
 [
   {
-    "id": "evt-001",
-    "slug": "standup-nacht-frankfurt",
-    "title": "Stand-up Nacht Frankfurt",
-    "subtitle": "Comedy-Abend auf BKS/DE",
-    "city": "Frankfurt",
-    "venue": "Saal am Main, Hanauer Landstr. 12",
-    "venueMapsUrl": "https://maps.google.com/?q=Frankfurt",
-    "date": "2026-11-15T20:00:00+01:00",
-    "endDate": "2026-11-15T23:00:00+01:00",
-    "type": "combined",
+    "id": "ulaz-6a0774c13741",
+    "slug": "pea-jovanovic-stutgart-2-termin-2026-10-30",
+    "title": "Peđa Jovanović - Štutgart - 2. termin",
+    "subtitle": "pop-rock",
+    "city": "Stuttgart",
+    "venue": "Schwabenlandhalle Fellbach",
+    "venueMapsUrl": "https://maps.app.goo.gl/ia8ftcaCNjqjfGAN6",
+    "date": "2026-10-30T20:00:00+00:00",
+    "endDate": "2026-10-30T20:00:00+00:00",
+    "type": "simple",
     "active": true,
-    "promo": false,
-    "organizer": "WAW Media Demo",
+    "promo": true,
+    "organizer": "D2 Music Events",
     "posterColor": "#1e3a5f",
     "bannerEmoji": "🎤",
-    "description": "Ein Abend voller Stand-up Comedy. Türkische und bosnische Acts, gemischt mit lokalem Humor. Bar und Garderobe vor Ort.",
-    "tags": ["Comedy", "Stand-up"],
-    "priceCategories": [
-      { "id": "cat-a", "name": "Sitzplatz A", "price": 35 },
-      { "id": "cat-b", "name": "Sitzplatz B", "price": 28 },
-      { "id": "cat-c", "name": "Stehplatz", "price": 18 }
+    "description": "🎤 ŠTUTGART, SPREMITE SE! 🎶 Posle prošlogodišnjeg koncerta koji se dugo prepričavao — spremamo vam novi spektakl! ✨ Peđa Jovanović stiže sa Big Concert Orchestrom u Štutgart za veče puno emocija, najvećih hitova i atmosfere za pamćenje! ❤️ 📍 Schwabenlandhalle Fellbach, Stuttgart 📅 30.10. 🕖 Ulaz od 19:00h 🎶 Početak koncerta u 20:00h ⚠️ Broj mesta je ograničen! 📞 Info & rezervacije: +49 163 5668114 M-TICKET (Mobilna ulaznica): Vaše PDF ulaznice prilagođene za mobilni telefon će biti poslate na email. Takođe, Vaše PDF mobilne ulaznice možete preuzeti na sajtu, odmah nakon naručivanja, na poslednjoj stranici kupovine. Pažljivo čuvajte ulaznice u svom telefonu i proverite bateriju na svom telefonu pre dolaska na događaj.",
+    "posterImage": "/images/events/pea-jovanovic-stutgart-2-termin-2026-10-30.webp",
+    "tags": [
+      "Stuttgart",
+      "Peđa Jovanović"
     ],
-    "seats": {
-      "workspaceKey": "",
-      "eventKey": "demo-frankfurt-standup",
-      "chartKey": "demo-chart-saal-main",
-      "hasNumericSeats": true,
-      "hasNonNumeric": true
-    },
-    "sold": 142,
-    "capacity": 400
-  },
-  {
-    "id": "evt-002",
-    "slug": "balkan-beats-muenchen",
-    "title": "Balkan Beats Live — München",
-    "subtitle": "Konzert & Dance Night",
-    "city": "München",
-    "venue": "Kulturhalle Süd, Rosenheimer Str. 90",
-    "venueMapsUrl": "https://maps.google.com/?q=München",
-    "date": "2026-12-06T21:00:00+01:00",
-    "endDate": "2026-12-07T02:00:00+01:00",
-    "type": "combined",
-    "active": true,
-    "promo": true,
-    "organizer": "WAW Media Demo",
-    "posterColor": "#7c2d12",
-    "bannerEmoji": "🎶",
-    "description": "Live-Band, DJ und offene Tanzfläche. Early-Bird bis Ende Oktober.",
-    "tags": ["Konzert", "Party"],
     "priceCategories": [
-      { "id": "cat-vip", "name": "VIP Tisch", "price": 65 },
-      { "id": "cat-std", "name": "Standard", "price": 32 },
-      { "id": "cat-door", "name": "Last Minute", "price": 40 }
-    ],
-    "seats": {
-      "workspaceKey": "",
-      "eventKey": "demo-muenchen-beats",
-      "chartKey": "demo-chart-kulturhalle",
-      "hasNumericSeats": true,
-      "hasNonNumeric": true
-    },
-    "sold": 289,
-    "capacity": 600
-  },
-  {
-    "id": "evt-003",
-    "slug": "akustik-abend-stuttgart",
-    "title": "Akustik Abend Stuttgart",
-    "subtitle": "Unplugged Session",
-    "city": "Stuttgart",
-    "venue": "Kellerbühne West, Königstr. 44",
-    "venueMapsUrl": "https://maps.google.com/?q=Stuttgart",
-    "date": "2026-11-28T19:30:00+01:00",
-    "endDate": "2026-11-28T22:30:00+01:00",
-    "type": "simple",
-    "active": true,
-    "promo": false,
-    "organizer": "WAW Media Demo",
-    "posterColor": "#365314",
-    "bannerEmoji": "🎸",
-    "description": "Intimes Unplugged-Konzert. Keine Sitzplatzkarte — nur Kontingent-Tickets.",
-    "tags": ["Konzert", "Akustik"],
-    "priceCategories": [
-      { "id": "cat-reg", "name": "Ticket", "price": 22 },
-      { "id": "cat-red", "name": "Ermäßigt", "price": 16 }
-    ],
-    "seats": {
-      "workspaceKey": "",
-      "eventKey": "",
-      "chartKey": "",
-      "hasNumericSeats": false,
-      "hasNonNumeric": true
-    },
-    "sold": 67,
-    "capacity": 120
-  },
-  {
-    "id": "evt-004",
-    "slug": "new-year-gala-frankfurt",
-    "title": "New Year Gala Frankfurt",
-    "subtitle": "Silvester mit Dinner",
-    "city": "Frankfurt",
-    "venue": "Palais am Mainufer",
-    "venueMapsUrl": "https://maps.google.com/?q=Frankfurt+Main",
-    "date": "2026-12-31T20:00:00+01:00",
-    "endDate": "2027-01-01T03:00:00+01:00",
-    "type": "combined",
-    "active": true,
-    "promo": true,
-    "organizer": "WAW Media Demo",
-    "posterColor": "#4c1d95",
-    "bannerEmoji": "🥂",
-    "description": "Silvester-Gala mit 3-Gänge-Menü, Live-Band und Mitternachtsshow. Tischplatzierung über seats.io.",
-    "tags": ["Gala", "Silvester"],
-    "priceCategories": [
-      { "id": "cat-gold", "name": "Gold Tisch (2 Pers.)", "price": 180 },
-      { "id": "cat-silber", "name": "Silber Tisch (2 Pers.)", "price": 140 },
-      { "id": "cat-einzeln", "name": "Einzelticket", "price": 85 }
-    ],
-    "seats": {
-      "workspaceKey": "",
-      "eventKey": "demo-nye-frankfurt",
-      "chartKey": "demo-chart-palais",
-      "hasNumericSeats": true,
-      "hasNonNumeric": false
-    },
-    "sold": 54,
-    "capacity": 250
-  },
-  {
-    "id": "evt-005",
-    "slug": "kinder-theater-nuernberg",
-    "title": "Kindertheater Nachmittag",
-    "subtitle": "Familie & Kinder 4+",
-    "city": "Nürnberg",
-    "venue": "Stadttheater Nebenraum",
-    "venueMapsUrl": "https://maps.google.com/?q=Nürnberg",
-    "date": "2026-11-08T15:00:00+01:00",
-    "endDate": "2026-11-08T17:00:00+01:00",
-    "type": "simple",
-    "active": false,
-    "promo": false,
-    "organizer": "WAW Media Demo",
-    "posterColor": "#0e7490",
-    "bannerEmoji": "🎭",
-    "description": "Märchenstück für Familien. Einfache Tickets ohne Sitzplan (Entwurf — noch nicht aktiv).",
-    "tags": ["Theater", "Familie"],
-    "priceCategories": [
-      { "id": "cat-adult", "name": "Erwachsene", "price": 14 },
-      { "id": "cat-child", "name": "Kind", "price": 8 }
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 40.0
+      }
     ],
     "seats": {
       "workspaceKey": "",
@@ -160,6 +46,505 @@
       "hasNonNumeric": true
     },
     "sold": 0,
-    "capacity": 80
+    "capacity": 231,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/pea-jovanovic-stutgart-2-termin-2026-10-30",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_whatsapp-image-2026-05-15-at-162412-1778876723043.webp"
+  },
+  {
+    "id": "ulaz-6a196c768b3d",
+    "slug": "enis-beslagic-freiburg",
+    "title": "Enis Bešlagić – Freiburg",
+    "subtitle": "stand-up",
+    "city": "Freiburg",
+    "venue": "Konzerthaus Freiburg",
+    "venueMapsUrl": "https://share.google/rbMLx20IHqzbYwBzj",
+    "date": "2026-10-31T20:00:00+00:00",
+    "endDate": "2026-10-31T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": true,
+    "organizer": "Boommedia",
+    "posterColor": "#7c2d12",
+    "bannerEmoji": "🎭",
+    "description": "„Da sam ja neko“ je autorska i autobiografska priča Enisa Bešlagića – pravi rolerkoster emocija koji svuda izaziva ogromno interesovanje publike. Ovo je predstava koja se gleda srcem i sluša dušom. Iskrena, emotivna i puna smijeha, nosi univerzalnu poruku ljubavi, nade i ljudskosti. Svaka izvedba završava ovacijama, a mnogi kažu da iz dvorane izlaze bogatiji za jedno nezaboravno životno iskustvo. Posebnu potvrdu kvaliteta donosi činjenica da je „Da sam ja neko“ zakazana za 02.09.2026. u velikoj dvorani slavnog Opera House-a u Sydneyu – što je historijski uspjeh, jer će to biti prvi put u historiji da jedan dramski umjetnik s ovih prostora izvede predstavu na toj sceni. 🎭 „Da sam ja neko“ nije samo predstava – to je priča koja nas spaja i u kojoj se svi pronalazimo. Preporučena je za cijelu",
+    "posterImage": "/images/events/enis-beslagic-freiburg.webp",
+    "tags": [
+      "Enis Beslagic",
+      "Freiburg"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 40.0
+      },
+      {
+        "id": "cat-8",
+        "name": "Kategorija 4",
+        "price": 35.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 1023,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/enis-beslagic-freiburg",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_da-sam-ja-neko-freiburg-1200x650-1780054571784.webp"
+  },
+  {
+    "id": "ulaz-6ab573716035",
+    "slug": "anelka-sta-me-opet-snae-technikum-munchen",
+    "title": "Anđelka – „Šta me OPET snađe“ – Technikum München",
+    "subtitle": "stand-up",
+    "city": "München",
+    "venue": "Technikum München",
+    "venueMapsUrl": "https://maps.app.goo.gl/5GHBzchCYMTWG7gx9",
+    "date": "2026-10-31T20:00:00+00:00",
+    "endDate": "2026-10-31T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": true,
+    "organizer": "Boommedia",
+    "posterColor": "#4c1d95",
+    "bannerEmoji": "🎭",
+    "description": "„Šta me OPET snađe“ je NOVA komedija – monodrama glumice Anđelke Stević Žugić o večno aktuelnoj temi razvoda. Glavna junakinja Jovanka Joka Jakovljević , u svojim kasnim 30im, kreće u nezaustavljivu vožnju kroz svoj emocionalni haos u koji je upala nakon razvoda. Brak joj se završio kao loš film, iako je očekivala romantičnu komediju, a život odjednom pretvorio u ring. Konkurencija je oštra, okolina surova, ali i Joka neustrašiva u svakoj svojoj suludoj odluci i tragikomičnoj situaciji. Autor teksta: Nebojša Romčević Režija: Petar Jovanović Muzika: Aleksandar Saša Lokner Produkcija: GMR, Beograd M-TICKET (Mobilna ulaznica): Vaše PDF ulaznice prilagođene za mobilni telefon će biti poslate na email. Takođe, Vaše PDF mobilne ulaznice možete preuzeti na sajtu, odmah nakon naručivanja, na posle",
+    "posterImage": "/images/events/anelka-sta-me-opet-snae-technikum-munchen.webp",
+    "tags": [
+      "München"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 40.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 35.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 30.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 43,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/anelka-sta-me-opet-snae-technikum-munchen",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_whatsapp-image-2026-09-23-at-223338-1790279715658.webp"
+  },
+  {
+    "id": "ulaz-6a7c27b23840",
+    "slug": "pea-jovanovic-big-concert-orchestra-capitol-offenbach",
+    "title": "Peđa Jovanović & Big Concert Orchestra - Capitol Offenbach",
+    "subtitle": "pop-rock",
+    "city": "Offenbach",
+    "venue": "Capitol Theater Offenbach",
+    "venueMapsUrl": "https://maps.app.goo.gl/6miz5VdiH9e4ChfF7",
+    "date": "2026-11-07T20:00:00+00:00",
+    "endDate": "2026-11-07T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "D2 Music Events",
+    "posterColor": "#365314",
+    "bannerEmoji": "🎤",
+    "description": "🎤FRANKFURT, SPREMITE SE 🎶 Posle sjajne atmosfere i koncerata koji se dugo pamte — vreme je za novi spektakl! ✨ Peđa Jovanović stiže sa Big Concert Orchestrom u Frankfurt i donosi veče ispunjeno emocijama, najvećim hitovima i atmosferom za pamćenje! ❤️ 📍 Capitol Theater Offenbach 📅 7.11. 🕖 Ulaz od 19:00h 🎶 Početak koncerta u 20:00h ⚠️ Broj mesta je ograničen — obezbedite svoje karte na vreme! 🎟️ Karte: ulaznice.de 📞 Info & rezervacije: +49 163 5668114 Organizator: D2MusicEvents Frankfurt, vidimo se 7. novembra! 🎤🎻✨ M-TICKET (Mobilna ulaznica): Vaše PDF ulaznice prilagođene za mobilni telefon će biti poslate na email. Takođe, Vaše PDF mobilne ulaznice možete preuzeti na sajtu, odmah nakon naručivanja, na poslednjoj stranici kupovine. Pažljivo čuvajte ulaznice u svom telefonu i proverite bate",
+    "posterImage": "/images/events/pea-jovanovic-big-concert-orchestra-capitol-offenbach.webp",
+    "tags": [
+      "Peđa Jovanović",
+      "Frankfurt"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 40.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 83,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/pea-jovanovic-big-concert-orchestra-capitol-offenbach",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_whatsapp-image-2026-08-11-at-145642-1786525115049.webp"
+  },
+  {
+    "id": "ulaz-6ab79c2e5211",
+    "slug": "enis-beslagic-munchen-13-termin",
+    "title": "Enis Bešlagić – München – 13. termin",
+    "subtitle": "stand-up",
+    "city": "München",
+    "venue": "TonHalle München",
+    "venueMapsUrl": "https://share.google/vYbOf7gXreQoeunT1",
+    "date": "2026-11-18T20:00:00+00:00",
+    "endDate": "2026-11-18T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "Boommedia",
+    "posterColor": "#0e7490",
+    "bannerEmoji": "🎭",
+    "description": "„Da sam ja neko“ je autorska i autobiografska priča Enisa Bešlagića – pravi rolerkoster emocija koji svuda izaziva ogromno interesovanje publike. Ovo je predstava koja se gleda srcem i sluša dušom. Iskrena, emotivna i puna smijeha, nosi univerzalnu poruku ljubavi, nade i ljudskosti. Svaka izvedba završava ovacijama, a mnogi kažu da iz dvorane izlaze bogatiji za jedno nezaboravno životno iskustvo. Posebnu potvrdu kvaliteta donosi činjenica da je „Da sam ja neko“ zakazana za 02.09.2026. u velikoj dvorani slavnog Opera House-a u Sydneyu – što je historijski uspjeh, jer će to biti prvi put u historiji da jedan dramski umjetnik s ovih prostora izvede predstavu na toj sceni. 🎭 „Da sam ja neko“ nije samo predstava – to je priča koja nas spaja i u kojoj se svi pronalazimo. Preporučena je za cijelu",
+    "posterImage": "/images/events/enis-beslagic-munchen-13-termin.webp",
+    "tags": [
+      "Enis Beslagic",
+      "München"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 55.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 4",
+        "price": 40.0
+      },
+      {
+        "id": "cat-8",
+        "name": "Kategorija 5",
+        "price": 35.0
+      },
+      {
+        "id": "cat-9",
+        "name": "Kategorija 3",
+        "price": 45.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 397,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/enis-beslagic-munchen-13-termin",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_da-sam-ja-neko-muinchen-13b-1200x650-1790421484319.webp"
+  },
+  {
+    "id": "ulaz-6a61dd61099d",
+    "slug": "enis-beslagic-dortmund-2-termin",
+    "title": "Enis Bešlagić – Dortmund - 2. termin",
+    "subtitle": "stand-up",
+    "city": "Dortmund",
+    "venue": "Dietrich-Keuning-Haus Dortmund",
+    "venueMapsUrl": "https://share.google/NoTMkz5os4MXst872",
+    "date": "2026-11-26T20:30:00+00:00",
+    "endDate": "2026-11-26T20:30:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "Boommedia",
+    "posterColor": "#9a3412",
+    "bannerEmoji": "🎭",
+    "description": "„Da sam ja neko“ je autorska i autobiografska priča Enisa Bešlagića – pravi rolerkoster emocija koji svuda izaziva ogromno interesovanje publike. Ovo je predstava koja se gleda srcem i sluša dušom. Iskrena, emotivna i puna smijeha, nosi univerzalnu poruku ljubavi, nade i ljudskosti. Svaka izvedba završava ovacijama, a mnogi kažu da iz dvorane izlaze bogatiji za jedno nezaboravno životno iskustvo. Posebnu potvrdu kvaliteta donosi činjenica da je „Da sam ja neko“ zakazana za 02.09.2026. u velikoj dvorani slavnog Opera House-a u Sydneyu – što je historijski uspjeh, jer će to biti prvi put u historiji da jedan dramski umjetnik s ovih prostora izvede predstavu na toj sceni. 🎭 „Da sam ja neko“ nije samo predstava – to je priča koja nas spaja i u kojoj se svi pronalazimo. Preporučena je za cijelu",
+    "posterImage": "/images/events/enis-beslagic-dortmund-2-termin.webp",
+    "tags": [
+      "Dortmund",
+      "Enis Beslagic"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 40.0
+      },
+      {
+        "id": "cat-8",
+        "name": "Kategorija 4",
+        "price": 35.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 556,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/enis-beslagic-dortmund-2-termin",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_da-sam-ja-neko-dortmund-2-1200x650-1784802061302.webp"
+  },
+  {
+    "id": "ulaz-6aca22ff6035",
+    "slug": "enis-beslagic-nurnberg-2-termin",
+    "title": "Enis Bešlagić – Nürnberg – 2. termin",
+    "subtitle": "stand-up",
+    "city": "Nürnberg",
+    "venue": "Meistersingerhalle Nürnberg",
+    "venueMapsUrl": "https://maps.app.goo.gl/r6vZ8iaBN4ES5kge7",
+    "date": "2026-11-28T20:00:00+00:00",
+    "endDate": "2026-11-28T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "Boommedia",
+    "posterColor": "#1e40af",
+    "bannerEmoji": "🎭",
+    "description": "„Da sam ja neko“ je autorska i autobiografska priča Enisa Bešlagića – pravi rolerkoster emocija koji svuda izaziva ogromno interesovanje publike. Ovo je predstava koja se gleda srcem i sluša dušom. Iskrena, emotivna i puna smijeha, nosi univerzalnu poruku ljubavi, nade i ljudskosti. Svaka izvedba završava ovacijama, a mnogi kažu da iz dvorane izlaze bogatiji za jedno nezaboravno životno iskustvo. Posebnu potvrdu kvaliteta donosi činjenica da je „Da sam ja neko“ zakazana za 02.09.2026. u velikoj dvorani slavnog Opera House-a u Sydneyu – što je historijski uspjeh, jer će to biti prvi put u historiji da jedan dramski umjetnik s ovih prostora izvede predstavu na toj sceni. 🎭 „Da sam ja neko“ nije samo predstava – to je priča koja nas spaja i u kojoj se svi pronalazimo. Preporučena je za cijelu",
+    "posterImage": "/images/events/enis-beslagic-nurnberg-2-termin.webp",
+    "tags": [
+      "Nürnberg",
+      "Enis Beslagic"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 40.0
+      },
+      {
+        "id": "cat-8",
+        "name": "Kategorija 4",
+        "price": 35.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 1262,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/enis-beslagic-nurnberg-2-termin",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_da-sam-ja-neko-nuirnberg-2-1200x650-1791635724338.webp"
+  },
+  {
+    "id": "ulaz-6ac761bca8a2",
+    "slug": "pea-jovanovic-big-concert-orchestra-karlsruhe",
+    "title": "Peđa Jovanović & Big Concert Orchestra - Karlsruhe",
+    "subtitle": "pop-rock",
+    "city": "Karlsruhe",
+    "venue": "Das Konzerthaus der Messe Karlsruhe",
+    "venueMapsUrl": "https://maps.app.goo.gl/9ieD5LiwBJstYHjG6",
+    "date": "2026-12-04T20:00:00+00:00",
+    "endDate": "2026-12-04T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "D2 Music Events",
+    "posterColor": "#831843",
+    "bannerEmoji": "🎤",
+    "description": "🎶 PEĐA JOVANOVIĆ & BIG CONCERT ORCHESTRA STIŽU U KARLSRUHE! 🎶 Spremite se za veče ispunjeno emocijama, vrhunskom muzikom i pesmama koje svi volimo. ❤️ Peđa Jovanović, uz pratnju Big Concert Orchestra, donosi nezaboravan koncert u Karlsruheu! ✨ 📍 Konzerthaus Karlsruhe 📅 04.12. 🚪 Ulaz: 19:00 🎤 Početak: 20:00 ⚠️ BROJ MESTA JE OGRANIČEN! 🎟️ Uzmite svoje ulaznice na vreme i obezbedite svoje mesto! Ulaznice: ulaznice.de 📞 Kontakt: 0163 566 8114 🔥 Ne čekajte poslednji trenutak — vidimo se u Karlsruheu! M-TICKET (Mobilna ulaznica): Vaše PDF ulaznice prilagođene za mobilni telefon će biti poslate na email. Takođe, Vaše PDF mobilne ulaznice možete preuzeti na sajtu, odmah nakon naručivanja, na poslednjoj stranici kupovine. Pažljivo čuvajte ulaznice u svom telefonu i proverite bateriju na svom telefo",
+    "posterImage": "/images/events/pea-jovanovic-big-concert-orchestra-karlsruhe.webp",
+    "tags": [
+      "Peđa Jovanović",
+      "Stuttgart"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 55.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 50.0
+      },
+      {
+        "id": "cat-8",
+        "name": "Kategorija 4",
+        "price": 40.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 825,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/pea-jovanovic-big-concert-orchestra-karlsruhe",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_whatsapp-image-2026-10-07-at-132922-1791455024689.webp"
+  },
+  {
+    "id": "ulaz-6aaaec968af9",
+    "slug": "adi-sose-al-music-band-duisburg",
+    "title": "Adi Šoše & AL Music Band - Duisburg",
+    "subtitle": "pop-rock",
+    "city": "Duisburg",
+    "venue": "Philharmonie Mercatorhalle Duisburg",
+    "venueMapsUrl": "https://maps.app.goo.gl/Kj7tHDybnduhLZMo6",
+    "date": "2026-12-12T20:00:00+00:00",
+    "endDate": "2026-12-12T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "D2 Music Events",
+    "posterColor": "#115e59",
+    "bannerEmoji": "🎤",
+    "description": "🎤 ADI ŠOŠE & AL MUSIC BAND – LIVE U DUISBURGU! 🔥 🔥 NRW, SPREMITE SE! 🔥 Stiže nam veče koje će se dugo pamtiti! ❤️‍🔥 Jedan od najprepoznatljivijih glasova regionalne muzičke scene stiže u Duisburg! Očekuje vas noć ispunjena emocijama, odličnom energijom, vrhunskom muzikom i hitovima koje svi volimo. ✨ Okupite ekipu — 12. decembra pjevamo zajedno! 📅 12. DECEMBAR 📍 Philharmonie Mercatorhalle – Duisburg 🚪 Einlass: 19:00 Uhr 🎶 Beginn: 20:00 Uhr 🎟️ TICKETING: ulaznice.de 📞 Info & rezervacije: 0163 5668114 NRW, vidimo se u Duisburgu! 🇩🇪🔥 Jedna bina. Jedna noć. Puno emocija. ❤️🎶",
+    "posterImage": "/images/events/adi-sose-al-music-band-duisburg.webp",
+    "tags": [
+      "Duisburg",
+      "ADI ŠOŠE"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 40.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 1281,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/adi-sose-al-music-band-duisburg",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_whatsapp-image-2026-09-15-at-121652-1789589986933.webp"
+  },
+  {
+    "id": "ulaz-6abd4ea78af9",
+    "slug": "boris-rezak-marko-milosevic-capitol-offenbach",
+    "title": "Boris Režak & Marko Milošević - Capitol Offenbach",
+    "subtitle": "pop-rock",
+    "city": "Offenbach",
+    "venue": "Capitol Theater Offenbach",
+    "venueMapsUrl": "https://maps.app.goo.gl/6miz5VdiH9e4ChfF7",
+    "date": "2027-02-27T20:00:00+00:00",
+    "endDate": "2027-02-27T20:00:00+00:00",
+    "type": "simple",
+    "active": true,
+    "promo": false,
+    "organizer": "D2 Music Events",
+    "posterColor": "#713f12",
+    "bannerEmoji": "🎤",
+    "description": "✨🎶 BORIS REŽAK & MARKO MILOŠEVIĆ 🎶✨ FRANKFURT, spremite se za veče poezije i muzike. ❤️ Boris Režak & Marko Milošević donose posebno veče ispunjeno muzikom, stihovima, emocijama i pričama koje ostaju dugo nakon poslednjeg aplauza. 📍 Capitol Theater Offenbach 📅 27.02.2027. 🕖 Ulaz: 19:00 Početak: 20:00 Organizator : D2 MusicEvents 🎟️ Ulaznice: ulaznice.de Sačuvajte datum i vidimo se na večeri za pamćenje! 🥂✨ M-TICKET (Mobilna ulaznica): Vaše PDF ulaznice prilagođene za mobilni telefon će biti poslate na email. Takođe, Vaše PDF mobilne ulaznice možete preuzeti na sajtu, odmah nakon naručivanja, na poslednjoj stranici kupovine. Pažljivo čuvajte ulaznice u svom telefonu i proverite bateriju na svom telefonu pre dolaska na događaj.",
+    "posterImage": "/images/events/boris-rezak-marko-milosevic-capitol-offenbach.webp",
+    "tags": [
+      "Frankfurt"
+    ],
+    "priceCategories": [
+      {
+        "id": "cat-5",
+        "name": "Kategorija 1",
+        "price": 60.0
+      },
+      {
+        "id": "cat-6",
+        "name": "Kategorija 2",
+        "price": 50.0
+      },
+      {
+        "id": "cat-7",
+        "name": "Kategorija 3",
+        "price": 40.0
+      }
+    ],
+    "seats": {
+      "workspaceKey": "",
+      "eventKey": "",
+      "chartKey": "",
+      "hasNumericSeats": false,
+      "hasNonNumeric": true
+    },
+    "sold": 0,
+    "capacity": 796,
+    "source": "ulaznice.de",
+    "sourceUrl": "https://ulaznice.de/event/boris-rezak-marko-milosevic-capitol-offenbach",
+    "posterImageRemote": "https://ulaznice.de/uploads/thumb480_whatsapp-image-2026-09-30-at-155555-1790800007699.webp"
   }
 ]

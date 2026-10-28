@@ -12,7 +12,7 @@
         <option value="">Alle Tags</option>
         <option v-for="t in allTags" :key="t" :value="t">{{ t }}</option>
       </select>
-      <label class="flex min-h-11 items-center gap-2 text-sm text-slate-600">
+      <label class="flex min-h-11 items-center gap-2 text-sm text-ink-soft">
         <input v-model="onlyActive" type="checkbox" class="rounded" />
         Nur aktive
       </label>
@@ -20,12 +20,16 @@
     <div v-if="filtered.length" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <EventCard v-for="e in filtered" :key="e.id" :event="e" />
     </div>
-    <p v-else class="text-slate-500">Keine Events gefunden.</p>
+    <p v-else class="text-ink-muted">Keine Events gefunden.</p>
   </div>
 </template>
 
 <script setup lang="ts">
-const { events, cities } = useEvents()
+const { events, cities, loadFromApi } = useEvents()
+const { data } = await useAsyncData('archive-events', () => $fetch('/api/public/events'))
+if (Array.isArray(data.value) && data.value.length) {
+  events.value = data.value as any
+}
 const city = ref('')
 const tag = ref('')
 const onlyActive = ref(true)

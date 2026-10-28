@@ -46,7 +46,7 @@
       <template v-if="form.type === 'combined'">
         <div class="sm:col-span-2 border-t pt-4">
           <p class="font-semibold text-sm mb-2">seats.io Keys (pro Event)</p>
-          <p class="text-xs text-slate-400 mb-2">Workspace Public/Secret Key → Admin Settings. Hier nur Chart Key + Event Key.</p>
+          <p class="text-xs text-slate-400 mb-2">1) Admin → Settings → Workspace Public/Secret Key + Region EU. 2) Hier echten Event Key (kein demo-*). Sonst: „chart could not be loaded“.</p>
         </div>
         <div>
           <label class="label">Chart Key</label>
@@ -154,6 +154,7 @@ function save() {
     promo: form.promo,
     organizer: form.organizer,
     posterColor: form.posterColor,
+    posterImage: props.event?.posterImage || '',
     bannerEmoji: form.bannerEmoji,
     description: form.description,
     tags: form.tags,

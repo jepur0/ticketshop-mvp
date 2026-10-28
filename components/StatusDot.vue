@@ -1,5 +1,5 @@
 <template>
-  <span class="shrink-0 whitespace-nowrap" :class="on ? 'font-medium text-emerald-600' : 'font-medium text-amber-600'">
+  <span :class="on ? 'text-emerald-600 font-medium' : 'text-amber-600 font-medium'">
     {{ on ? 'gesetzt' : 'leer' }}
   </span>
 </template>

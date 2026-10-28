@@ -8,6 +8,9 @@
       <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
         <NuxtLink to="/admin/events/new?type=combined" class="btn-primary w-full sm:w-auto">+ Combined Event</NuxtLink>
         <NuxtLink to="/admin/events/new?type=simple" class="btn-secondary w-full sm:w-auto">+ Simple Event</NuxtLink>
+        <button type="button" class="btn-secondary !text-xs" :disabled="importing" @click="importUlaznice">
+          {{ importing ? 'Import…' : 'Import ulaznice.de' }}
+        </button>
         <button type="button" class="btn-secondary w-full sm:w-auto" @click="toast('GATEWAY REPORT (stub)')">GATEWAY REPORT</button>
         <button type="button" class="btn-secondary w-full sm:w-auto" @click="toast('BULK REPORT (stub)')">BULK REPORT</button>
       </div>
@@ -24,9 +27,12 @@
       <article v-for="e in filtered" :key="e.id" class="card space-y-3 p-4">
         <div class="flex items-start gap-3">
           <div
-            class="flex h-12 w-12 shrink-0 items-center justify-center rounded text-xl"
+            class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded text-xl"
             :style="{ background: e.posterColor }"
-          >{{ e.bannerEmoji }}</div>
+          >
+            <img v-if="e.posterImage" :src="e.posterImage" alt="" class="h-full w-full object-cover" />
+            <template v-else>{{ e.bannerEmoji }}</template>
+          </div>
           <div class="min-w-0 flex-1">
             <p class="font-medium break-words">{{ e.title }}</p>
             <p class="text-xs text-slate-400">
@@ -99,9 +105,12 @@
             </td>
             <td class="px-3 py-2">
               <div
-                class="h-10 w-10 rounded flex items-center justify-center text-lg"
+                class="flex h-10 w-10 items-center justify-center overflow-hidden rounded text-lg"
                 :style="{ background: e.posterColor }"
-              >{{ e.bannerEmoji }}</div>
+              >
+                <img v-if="e.posterImage" :src="e.posterImage" alt="" class="h-full w-full object-cover" />
+                <template v-else>{{ e.bannerEmoji }}</template>
+              </div>
             </td>
             <td class="px-3 py-2">
               <p class="font-medium">{{ e.title }}</p>
@@ -140,11 +149,30 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'admin', middleware: 'auth' })
 
-const { events, remove, upsert } = useEvents()
+const { events, remove, upsert, loadFromApi } = useEvents()
 const q = ref('')
 const from = ref('')
 const to = ref('')
 const msg = ref('')
+const importing = ref(false)
+
+async function importUlaznice() {
+  if (!confirm('Upcoming Events von ulaznice.de importieren? (Demo-Events werden deaktiviert)')) return
+  importing.value = true
+  msg.value = ''
+  try {
+    const res = await $fetch<any>('/api/admin/import-ulaznice', {
+      method: 'POST',
+      body: { upcomingOnly: true, deactivateDemos: true }
+    })
+    msg.value = `✓ Import: ${res.imported} Events`
+    await loadFromApi()
+  } catch (e: any) {
+    msg.value = e?.data?.statusMessage || e?.message || 'Import fehlgeschlagen'
+  } finally {
+    importing.value = false
+  }
+}
 
 const filtered = computed(() =>
   events.value.filter((e) => {

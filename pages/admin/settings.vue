@@ -33,7 +33,7 @@
     <form v-if="form" class="space-y-6" @submit.prevent="save">
       <section class="card p-5 space-y-3">
         <h2 class="font-semibold">seats.io</h2>
-        <p class="text-xs text-slate-500">Paste keys from seats.io dashboard. Chart Key per Combined event.</p>
+        <p class="text-xs text-slate-500">Workspace Public Key + Secret aus seats.io (Region EU). Pro Combined-Event: Event Key unter Events → bearbeiten. Ablauf: Chart zeichnen → Event in seats.io → Keys hier/am Event → Käufer sieht Sitzplan.</p>
         <div>
           <label class="label !flex items-start justify-between gap-3">
             <span>Workspace Public Key</span>

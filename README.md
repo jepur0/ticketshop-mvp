@@ -117,3 +117,34 @@ public/           manifest, sw.js, icons
 ## License / demo
 
 Internal WAW Media demo. Do not scrape or copy third-party shop CSS/images.
+
+## Sitzplan (seats.io) — how it works
+
+1. Create a free/paid account at [seats.io](https://www.seats.io) (Region **EU** for Germany).
+2. Draw a seating chart → publish → create an **Event** for that chart → copy **Event Key**.
+3. In TicketShop: **Admin → Settings → seats.io** paste **Workspace Public Key**, **Secret Key**, Region `EU`.
+4. **Admin → Events → Edit** (type **Combined**): paste **Event Key** (and optional Chart Key). Never use `demo-*` placeholders.
+5. Buyer opens `/event/[slug]` → live Sitzplan → selects seats → hold → checkout.
+
+If Workspace Key is set but Event Key is missing/`demo-*`, the shop shows the **Placeholder** (category buttons) instead of the English seats.io error “The seating chart could not be loaded”.
+
+## Import events from ulaznice.de
+
+Upcoming events (title, date, venue, prices, description, poster) can be pulled without their seats.io keys:
+
+```bash
+# Write data/events-ulaznice.json
+npm run import:ulaznice
+
+# Replace seed data/events.json
+npm run import:ulaznice:seed
+
+# Push into a running instance (login as admin)
+IMPORT_BASE=https://ticketshop-mvp.onrender.com \
+  IMPORT_EMAIL=admin@ticketshop.local IMPORT_PASSWORD=admin \
+  npm run import:ulaznice:push
+```
+
+Or in the admin UI after deploy: **Events → Import ulaznice.de** (`POST /api/admin/import-ulaznice`).
+
+Imported events are `type: simple`. To enable Sitzplan later, switch to Combined and attach **your** seats.io Event Key (do not reuse ulaznice/Boommedia workspace keys).
