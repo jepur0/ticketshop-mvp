@@ -9,7 +9,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "import:ulaznice": "node scripts/import-ulaznice.mjs",
+    "import:ulaznice:push": "node scripts/import-ulaznice.mjs --push",
+    "import:ulaznice:seed": "node scripts/import-ulaznice.mjs --seed"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.13.1",

@@ -225,9 +225,38 @@ export async function releaseExpiredHolds(): Promise<number> {
 
 export async function readEvents(): Promise<any[]> {
   await ensureDb()
+  const { existsSync } = await import('node:fs')
+  const { join } = await import('node:path')
+  const publicRoot = join(process.cwd(), 'public')
   return dbApi
     .all<{ data: string }>('SELECT data FROM events ORDER BY slug')
-    .map((r) => JSON.parse(r.data))
+    .map((r) => {
+      const e = JSON.parse(r.data)
+      // Prefer cached local posters under /public/images/events
+      const local = e.posterImage && String(e.posterImage).startsWith('/images/')
+        ? e.posterImage
+        : null
+      const remote = e.posterImageRemote || (e.posterImage?.startsWith('http') ? e.posterImage : null)
+      if (local && existsSync(join(publicRoot, local.replace(/^\//, '')))) {
+        e.posterImage = local
+      } else if (remote) {
+        // Derive cache path from slug when seed was updated but DB still has remote URL
+        const slug = String(e.slug || e.id || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9-]+/g, '-')
+          .slice(0, 60)
+        for (const ext of ['.webp', '.jpg', '.png']) {
+          const rel = `/images/events/${slug}${ext}`
+          if (existsSync(join(publicRoot, rel.slice(1)))) {
+            e.posterImage = rel
+            e.posterImageRemote = remote
+            break
+          }
+        }
+        if (!String(e.posterImage || '').startsWith('/images/')) e.posterImage = remote
+      }
+      return e
+    })
 }
 
 export async function writeEvents(events: any[]) {

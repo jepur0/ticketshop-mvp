@@ -1,15 +1,16 @@
 <template>
   <div>
-    <h1 class="mb-6 text-3xl font-semibold">Dashboard</h1>
-    <div class="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <p class="eyebrow">Übersicht</p>
+    <h1 class="page-title mt-2 mb-6">Dashboard</h1>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
       <div v-for="s in stats" :key="s.label" class="card p-5">
-        <p class="eyebrow">{{ s.label }}</p>
-        <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">{{ s.value }}</p>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-muted">{{ s.label }}</p>
+        <p class="mt-2 font-display text-2xl font-medium text-ink">{{ s.value }}</p>
       </div>
     </div>
 
-    <div class="card mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 p-4 text-sm text-slate-600 sm:p-5">
-      <span class="font-medium text-slate-900">Schnellzugriff:</span>
+    <div class="card p-4 mb-8 text-sm text-ink-soft flex flex-wrap gap-3 items-center">
+      <span class="font-medium text-ink">Schnellzugriff:</span>
       <NuxtLink to="/admin/settings" class="link">Settings (API keys)</NuxtLink>
       <NuxtLink to="/admin/monitoring" class="link">Monitoring</NuxtLink>
       <NuxtLink to="/admin/scanner" class="link">Scanner</NuxtLink>
@@ -22,11 +23,11 @@
         v-for="op in ops"
         :key="op"
         type="button"
-        class="card px-4 py-3 text-left text-sm text-slate-700 transition hover:border-slate-300 hover:shadow-md"
+        class="card px-4 py-3 text-left text-sm hover:border-gold/40 hover:bg-gold/5 transition"
         @click="runOp(op)"
       >
         {{ op }}
-        <span class="block text-xs text-slate-400 mt-0.5">{{ op.includes('Release') || op.includes('expired') ? 'Live' : 'Stub' }}</span>
+        <span class="block text-xs text-ink-muted mt-0.5">{{ op.includes('Release') || op.includes('expired') ? 'Live' : 'Stub' }}</span>
       </button>
     </div>
     <p v-if="opMsg" class="text-sm text-emerald-700 mb-4">{{ opMsg }}</p>
@@ -45,7 +46,7 @@
     </div>
     <div class="card hidden overflow-x-auto md:block">
       <table class="w-full text-sm">
-        <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
+        <thead class="table-head">
           <tr>
             <th class="px-4 py-2">ID</th>
             <th class="px-4 py-2">Event</th>
@@ -55,7 +56,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="o in recentOrders" :key="o.id" class="border-t border-slate-100">
+          <tr v-for="o in recentOrders" :key="o.id" class="border-t border-line">
             <td class="px-4 py-2 font-mono text-xs">{{ o.id }}</td>
             <td class="px-4 py-2">{{ o.eventTitle }}</td>
             <td class="px-4 py-2">{{ o.customer?.name }}</td>

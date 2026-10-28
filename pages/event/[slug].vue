@@ -1,45 +1,38 @@
 <template>
-  <div v-if="event" class="mx-auto max-w-6xl px-4 py-6 sm:py-8">
-    <div
-      v-if="eventItems.length"
-      class="sticky top-[61px] z-30 mb-4 flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 shadow-md backdrop-blur sm:top-[69px] lg:hidden"
-    >
-      <div class="min-w-0 flex-1">
-        <p class="text-xs text-slate-500">{{ eventItems.length }} {{ eventItems.length === 1 ? 'Ticket' : 'Tickets' }}</p>
-        <p class="font-semibold">{{ eventTotal }} €</p>
-      </div>
-      <NuxtLink to="/checkout" class="btn-primary shrink-0">Zur Kasse</NuxtLink>
-    </div>
-    <div class="grid gap-8 lg:grid-cols-[1fr_320px]">
-      <div class="min-w-0">
-        <div class="mb-8 overflow-hidden rounded-2xl border border-slate-200/80 shadow-sm">
-          <div
-            class="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden text-7xl sm:aspect-[16/10] sm:text-8xl"
-            :style="{ background: event.posterColor }"
-          >
+  <div v-if="event" class="mx-auto max-w-6xl px-4 py-10 sm:py-14">
+    <div class="grid gap-10 lg:grid-cols-[1fr_340px]">
+      <div>
+        <div
+          class="relative mb-8 overflow-hidden rounded-[1.35rem] border border-line shadow-soft"
+          :style="{ background: event.posterColor || '#17151a' }"
+        >
+          <div class="aspect-[21/9] min-h-[180px] sm:min-h-[220px]">
             <img
               v-if="event.posterImage"
               :src="event.posterImage"
               :alt="event.title"
-              class="absolute inset-0 h-full w-full object-cover"
-              decoding="async"
+              class="h-full w-full object-cover"
             />
-            <template v-else>
-              <span class="pointer-events-none absolute inset-4 rounded-xl border border-white/50 sm:inset-6" aria-hidden="true" />
-              <span class="relative">{{ event.bannerEmoji }}</span>
-            </template>
+            <div v-else class="flex h-full items-center justify-center text-7xl">{{ event.bannerEmoji }}</div>
           </div>
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         </div>
-        <p class="eyebrow mb-3 break-words">{{ event.city }} · {{ event.venue }}</p>
-        <h1 class="break-words text-3xl font-semibold text-slate-900 sm:text-5xl">{{ event.title }}</h1>
-        <p class="mt-3 break-words text-lg text-slate-500">{{ event.subtitle }}</p>
-        <p class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600">
-          <span>{{ formatDate(event.date) }}</span>
-          <a v-if="event.venueMapsUrl" :href="event.venueMapsUrl" target="_blank" class="link inline-flex min-h-11 items-center sm:min-h-0">Karte</a>
-        </p>
-        <p class="mt-8 leading-relaxed whitespace-pre-line text-slate-600">{{ event.description }}</p>
 
-        <div class="mt-8">
+        <p class="eyebrow">{{ event.city }} · {{ event.venue }}</p>
+        <h1 class="page-title mt-3">{{ event.title }}</h1>
+        <p v-if="event.subtitle" class="page-dek">{{ event.subtitle }}</p>
+        <p class="mt-4 text-sm font-medium text-ink-soft">
+          {{ formatDate(event.date) }}
+          <a
+            v-if="event.venueMapsUrl"
+            :href="event.venueMapsUrl"
+            target="_blank"
+            class="link ml-2"
+          >Karte</a>
+        </p>
+        <p class="mt-6 whitespace-pre-line text-base leading-relaxed text-ink-soft">{{ event.description }}</p>
+
+        <div class="mt-10">
           <SeatsChart
             v-if="event.type === 'combined'"
             :workspace-key="integrations?.seatsio?.workspacePublicKey"
@@ -54,47 +47,49 @@
             @deselect-seat="onDeselectSeat"
             @hold-token="onHoldToken"
           />
-          <div v-else class="card p-6">
-            <h2 class="font-semibold mb-3">Tickets (ohne Sitzplan)</h2>
-            <div class="space-y-2">
+          <div v-else class="card p-6 sm:p-7">
+            <h2 class="font-display text-xl font-medium">Tickets wählen</h2>
+            <p class="mt-1 text-sm text-ink-muted">Ohne Sitzplan — Kategorie und Anzahl.</p>
+            <div class="mt-5 space-y-2.5">
               <button
                 v-for="cat in event.priceCategories"
                 :key="cat.id"
                 type="button"
-                class="btn-secondary w-full !justify-between"
+                class="btn-secondary flex w-full items-center !justify-between !rounded-xl !min-h-12"
                 @click="onSelectCategory(cat)"
               >
                 <span>{{ cat.name }}</span>
-                <span class="font-bold">{{ cat.price }} €</span>
+                <span class="font-semibold tabular-nums">{{ cat.price }} €</span>
               </button>
             </div>
-            <p class="text-xs text-slate-400 mt-3">Reservierung wird {{ holdMinutes }} Minuten gehalten.</p>
+            <p class="mt-4 text-xs text-ink-muted">Reservierung wird {{ holdMinutes }} Minuten gehalten.</p>
           </div>
         </div>
       </div>
 
       <aside class="h-fit lg:sticky lg:top-24">
-        <div class="card p-5 sm:p-6">
-          <h2 class="mb-4 text-lg font-semibold">Warenkorb</h2>
-          <p v-if="!eventItems.length" class="text-sm text-slate-400">Noch keine Tickets gewählt.</p>
-          <ul v-else class="mb-4 space-y-2">
-            <li v-for="(item, i) in eventItems" :key="i" class="flex items-center gap-2 border-b border-slate-100 pb-2 text-sm">
-              <span class="min-w-0 flex-1 break-words">{{ item.label }}</span>
-              <span class="shrink-0 font-medium">{{ item.price }} €</span>
-              <button
-                type="button"
-                class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-red-600 hover:bg-red-50"
-                :aria-label="`${item.label} entfernen`"
-                @click="removeFromEvent(item)"
-              >✕</button>
+        <div class="card p-6">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Warenkorb</p>
+          <p v-if="!eventItems.length" class="mt-3 text-sm text-ink-muted">Noch keine Tickets gewählt.</p>
+          <ul v-else class="mt-4 mb-4 space-y-3">
+            <li
+              v-for="(item, i) in eventItems"
+              :key="i"
+              class="flex items-start justify-between gap-3 border-b border-line pb-3 text-sm"
+            >
+              <span class="min-w-0 leading-snug">{{ item.label }}</span>
+              <div class="flex shrink-0 items-center gap-2">
+                <span class="font-semibold tabular-nums">{{ item.price }} €</span>
+                <button type="button" class="text-xs text-red-500/90 hover:text-red-600" @click="removeFromEvent(item)">✕</button>
+              </div>
             </li>
           </ul>
-          <div v-if="eventItems.length" class="flex justify-between font-semibold mb-2">
+          <div v-if="eventItems.length" class="mb-3 flex justify-between text-base font-semibold">
             <span>Summe</span>
-            <span>{{ eventTotal }} €</span>
+            <span class="tabular-nums">{{ eventTotal }} €</span>
           </div>
-          <p v-if="holdStartedAt" class="text-xs text-amber-700 mb-3">
-            ⏱ Hold: ca. {{ holdMinutes }} Min. — danach werden Plätze freigegeben.
+          <p v-if="holdStartedAt" class="mb-4 text-xs text-gold-deep">
+            Hold: ca. {{ holdMinutes }} Min. — danach werden Plätze freigegeben.
           </p>
           <NuxtLink
             to="/checkout"
@@ -107,8 +102,9 @@
       </aside>
     </div>
   </div>
-  <div v-else class="mx-auto max-w-6xl px-4 py-20 text-center text-slate-500">
-    Event nicht gefunden. <NuxtLink to="/archive" class="link">Zur Übersicht</NuxtLink>
+  <div v-else class="mx-auto max-w-6xl px-4 py-24 text-center text-ink-soft">
+    Event nicht gefunden.
+    <NuxtLink to="/archive" class="link ml-1">Zur Übersicht</NuxtLink>
   </div>
 </template>
 
@@ -152,7 +148,6 @@ function onSelectCategory(cat: { id: string; name: string; price: number }) {
 
 function onSelectSeat(payload: { seatId: string; label: string; categoryId?: string; price: number }) {
   if (!event.value) return
-  // avoid dup
   if (items.value.some((i) => i.seatId === payload.seatId && i.eventId === event.value!.id)) return
   const cat = event.value.priceCategories.find((c) => c.id === payload.categoryId)
   addItem({

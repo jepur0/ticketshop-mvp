@@ -1,35 +1,34 @@
 <template>
   <div class="min-h-screen flex flex-col" :class="consent === null ? 'pb-48 sm:pb-28' : ''">
-    <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-      <div class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2 sm:gap-4 sm:px-4 sm:py-3">
-        <NuxtLink to="/" class="flex min-w-0 items-center gap-2.5 text-slate-900">
-          <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-900 text-[11px] font-semibold tracking-tight">TS</span>
-          <span class="hidden truncate text-[15px] font-medium tracking-tight min-[380px]:inline">TicketShop</span>
+    <header class="sticky top-0 z-40 border-b border-line/80 bg-paper/80 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2.5 sm:gap-4 sm:px-4 sm:py-3.5">
+        <NuxtLink to="/" class="group flex min-w-0 items-center gap-2.5">
+          <span
+            class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-night text-[11px] font-bold tracking-wide text-gold-soft shadow-glow"
+          >TS</span>
+          <span class="min-w-0 leading-tight">
+            <span class="block truncate text-[15px] font-semibold tracking-tight text-ink">TicketShop</span>
+            <span class="hidden text-[10px] font-medium uppercase tracking-[0.14em] text-ink-muted min-[380px]:block">by WAW Media</span>
+          </span>
         </NuxtLink>
-        <nav class="hidden items-center gap-6 text-sm text-slate-500 lg:flex">
-          <NuxtLink to="/" class="transition hover:text-slate-900" exact-active-class="font-medium text-slate-900">Start</NuxtLink>
-          <NuxtLink to="/archive" class="transition hover:text-slate-900" active-class="font-medium text-slate-900">Alle Events</NuxtLink>
-          <NuxtLink to="/ticket-find" class="transition hover:text-slate-900" active-class="font-medium text-slate-900">Tickets finden</NuxtLink>
-          <NuxtLink to="/login" class="transition hover:text-slate-900" active-class="font-medium text-slate-900">Organizer</NuxtLink>
+        <nav class="hidden items-center gap-1 text-sm font-medium text-ink-soft md:flex">
+          <NuxtLink to="/" class="rounded-full px-3 py-2 hover:bg-white/70 hover:text-ink">Start</NuxtLink>
+          <NuxtLink to="/archive" class="rounded-full px-3 py-2 hover:bg-white/70 hover:text-ink">Alle Events</NuxtLink>
+          <NuxtLink to="/ticket-find" class="rounded-full px-3 py-2 hover:bg-white/70 hover:text-ink">Tickets finden</NuxtLink>
+          <NuxtLink to="/login" class="rounded-full px-3 py-2 hover:bg-white/70 hover:text-ink">Organizer</NuxtLink>
         </nav>
         <div class="flex shrink-0 items-center gap-2">
-          <button
-            type="button"
-            class="inline-flex h-11 min-w-11 items-center justify-center rounded-full border border-slate-200 bg-white px-3 text-xs font-medium uppercase tracking-wide text-slate-500"
-            title="Sprachumschalter (Stub)"
-          >
-            DE ▾
-          </button>
-          <NuxtLink to="/checkout" class="btn-secondary relative whitespace-nowrap !px-3.5 text-xs sm:text-sm">
+          <span class="hidden text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted sm:inline">DE</span>
+          <NuxtLink to="/checkout" class="relative btn-secondary !min-h-9 !px-3.5 !py-1.5 text-xs">
             Warenkorb
             <span
               v-if="count"
-              class="absolute -top-1 right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-[10px] font-semibold text-white"
+              class="absolute -top-1 right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-night"
             >{{ count }}</span>
           </NuxtLink>
           <button
             type="button"
-            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 lg:hidden"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong bg-paper-card text-ink md:hidden"
             :aria-expanded="menuOpen"
             aria-controls="mobile-nav"
             :aria-label="menuOpen ? 'Menü schließen' : 'Menü öffnen'"
@@ -47,71 +46,45 @@
       <nav
         v-show="menuOpen"
         id="mobile-nav"
-        class="border-t border-slate-100 bg-white/95 lg:hidden"
+        class="border-t border-line bg-paper-card/95 md:hidden"
       >
-        <NuxtLink
-          to="/"
-          class="flex min-h-11 items-center border-b border-slate-100 px-4 py-3 text-base text-slate-600 hover:bg-slate-50"
-          exact-active-class="bg-slate-50 font-medium text-slate-900"
-          @click="menuOpen = false"
-        >
-          Start
-        </NuxtLink>
-        <NuxtLink
-          to="/archive"
-          class="flex min-h-11 items-center border-b border-slate-100 px-4 py-3 text-base text-slate-600 hover:bg-slate-50"
-          active-class="bg-slate-50 font-medium text-slate-900"
-          @click="menuOpen = false"
-        >
-          Alle Events
-        </NuxtLink>
-        <NuxtLink
-          to="/ticket-find"
-          class="flex min-h-11 items-center border-b border-slate-100 px-4 py-3 text-base text-slate-600 hover:bg-slate-50"
-          active-class="bg-slate-50 font-medium text-slate-900"
-          @click="menuOpen = false"
-        >
-          Tickets finden
-        </NuxtLink>
-        <NuxtLink
-          to="/login"
-          class="flex min-h-11 items-center px-4 py-3 text-base text-slate-600 hover:bg-slate-50"
-          active-class="bg-slate-50 font-medium text-slate-900"
-          @click="menuOpen = false"
-        >
-          Organizer
-        </NuxtLink>
+        <NuxtLink to="/" class="flex min-h-11 items-center border-b border-line px-4 py-3 text-base text-ink-soft hover:bg-white/70 hover:text-ink" @click="menuOpen = false">Start</NuxtLink>
+        <NuxtLink to="/archive" class="flex min-h-11 items-center border-b border-line px-4 py-3 text-base text-ink-soft hover:bg-white/70 hover:text-ink" @click="menuOpen = false">Alle Events</NuxtLink>
+        <NuxtLink to="/ticket-find" class="flex min-h-11 items-center border-b border-line px-4 py-3 text-base text-ink-soft hover:bg-white/70 hover:text-ink" @click="menuOpen = false">Tickets finden</NuxtLink>
+        <NuxtLink to="/login" class="flex min-h-11 items-center px-4 py-3 text-base text-ink-soft hover:bg-white/70 hover:text-ink" @click="menuOpen = false">Organizer</NuxtLink>
       </nav>
     </header>
 
-    <main class="flex-1 min-w-0">
+    <main class="flex-1">
       <slot />
     </main>
 
-    <footer class="mt-16 border-t border-slate-200/80 bg-white">
-      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 text-sm text-slate-600 sm:grid-cols-3">
+    <footer class="mt-16 border-t border-line bg-night text-paper-soft">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-3">
         <div>
-          <p class="mb-2 font-medium tracking-tight text-slate-900">TicketShop</p>
-          <p class="leading-relaxed">MVP-Demo für WAW Media / Frankfurt. Keine echte Zahlung.</p>
+          <p class="font-display text-xl font-medium text-paper-soft">TicketShop</p>
+          <p class="mt-3 text-sm leading-relaxed text-white/55">
+            Premium Ticketing für Konzerte und Events. Demo für WAW Media / Frankfurt.
+          </p>
         </div>
         <div>
-          <p class="mb-2 font-medium tracking-tight text-slate-900">Rechtliches</p>
-          <ul class="space-y-1">
-            <li><NuxtLink to="/page/impressum" class="inline-flex min-h-11 items-center transition hover:text-slate-900 sm:min-h-0">Impressum</NuxtLink></li>
-            <li><NuxtLink to="/page/datenschutz" class="inline-flex min-h-11 items-center transition hover:text-slate-900 sm:min-h-0">Datenschutz</NuxtLink></li>
-            <li><NuxtLink to="/page/agb" class="inline-flex min-h-11 items-center transition hover:text-slate-900 sm:min-h-0">AGB</NuxtLink></li>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-gold-soft/90">Rechtliches</p>
+          <ul class="mt-3 space-y-2 text-sm text-white/65">
+            <li><NuxtLink to="/page/impressum" class="inline-flex min-h-11 items-center hover:text-gold-soft sm:min-h-0">Impressum</NuxtLink></li>
+            <li><NuxtLink to="/page/datenschutz" class="inline-flex min-h-11 items-center hover:text-gold-soft sm:min-h-0">Datenschutz</NuxtLink></li>
+            <li><NuxtLink to="/page/agb" class="inline-flex min-h-11 items-center hover:text-gold-soft sm:min-h-0">AGB</NuxtLink></li>
           </ul>
         </div>
         <div>
-          <p class="mb-2 font-medium tracking-tight text-slate-900">Hilfe</p>
-          <ul class="space-y-1">
-            <li><NuxtLink to="/ticket-find" class="inline-flex min-h-11 items-center transition hover:text-slate-900 sm:min-h-0">Tickets finden / erneut senden</NuxtLink></li>
-            <li><a href="mailto:support@ticketshop.local" class="inline-flex min-h-11 items-center break-all transition hover:text-slate-900 sm:min-h-0">support@ticketshop.local</a></li>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-gold-soft/90">Hilfe</p>
+          <ul class="mt-3 space-y-2 text-sm text-white/65">
+            <li><NuxtLink to="/ticket-find" class="inline-flex min-h-11 items-center hover:text-gold-soft sm:min-h-0">Tickets finden / erneut senden</NuxtLink></li>
+            <li><a href="mailto:support@ticketshop.local" class="inline-flex min-h-11 items-center break-all hover:text-gold-soft sm:min-h-0">support@ticketshop.local</a></li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-slate-100 py-4 text-center text-xs tracking-wide text-slate-400">
-        © {{ year }} TicketShop MVP — Demo only
+      <div class="border-t border-white/10 py-4 text-center text-xs text-white/35">
+        © {{ year }} TicketShop · WAW Media
       </div>
     </footer>
   </div>
