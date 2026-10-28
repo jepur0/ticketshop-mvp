@@ -24,9 +24,12 @@
       <article v-for="e in filtered" :key="e.id" class="card space-y-3 p-4">
         <div class="flex items-start gap-3">
           <div
-            class="flex h-12 w-12 shrink-0 items-center justify-center rounded text-xl"
+            class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded text-xl"
             :style="{ background: e.posterColor }"
-          >{{ e.bannerEmoji }}</div>
+          >
+            <img v-if="e.posterImage" :src="e.posterImage" alt="" class="h-full w-full object-cover" />
+            <template v-else>{{ e.bannerEmoji }}</template>
+          </div>
           <div class="min-w-0 flex-1">
             <p class="font-medium break-words">{{ e.title }}</p>
             <p class="text-xs text-slate-400">
@@ -99,9 +102,12 @@
             </td>
             <td class="px-3 py-2">
               <div
-                class="h-10 w-10 rounded flex items-center justify-center text-lg"
+                class="flex h-10 w-10 items-center justify-center overflow-hidden rounded text-lg"
                 :style="{ background: e.posterColor }"
-              >{{ e.bannerEmoji }}</div>
+              >
+                <img v-if="e.posterImage" :src="e.posterImage" alt="" class="h-full w-full object-cover" />
+                <template v-else>{{ e.bannerEmoji }}</template>
+              </div>
             </td>
             <td class="px-3 py-2">
               <p class="font-medium">{{ e.title }}</p>

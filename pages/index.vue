@@ -1,10 +1,21 @@
 <template>
   <div>
-    <section class="relative overflow-hidden border-b border-slate-200/70 bg-gradient-to-b from-[#f4efe6] via-slate-50 to-slate-50">
-      <div
-        class="pointer-events-none absolute inset-0"
+    <section class="relative overflow-hidden border-b border-slate-200/70 bg-[#f4efe6]">
+      <img
+        src="/images/hero-editorial.webp"
+        alt=""
+        class="pointer-events-none absolute inset-0 h-full w-full object-cover object-[72%_center]"
         aria-hidden="true"
-        style="background-image: radial-gradient(ellipse at 12% 0%, rgba(255,255,255,0.95), transparent 52%), radial-gradient(ellipse at 92% 8%, rgba(15,23,42,0.05), transparent 42%);"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#f4efe6]/95 via-[#f4efe6]/82 to-[#f4efe6]/40 sm:via-[#f4efe6]/72 sm:to-[#f4efe6]/25"
+        aria-hidden="true"
+      />
+      <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/35 via-transparent to-[#f8fafc]/80"
+        aria-hidden="true"
       />
       <div class="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 lg:py-28">
         <p class="eyebrow mb-5">Tickets online</p>
@@ -38,4 +49,8 @@
 
 <script setup lang="ts">
 const { featured } = useEvents()
+
+useHead({
+  link: [{ rel: 'preload', as: 'image', href: '/images/hero-editorial.webp' }]
+})
 </script>
