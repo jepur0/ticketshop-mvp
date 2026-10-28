@@ -149,10 +149,39 @@ function seedUsersIfEmpty() {
   console.log('[db] Seeded users: admin@ / scanner@ / client@ (change passwords in production)')
 }
 
+/** Fill missing poster paths from data/events.json without touching other event fields. */
+function applyPosterImagesFromSeed() {
+  const seeds = readJsonFile<Array<{ slug?: string; posterImage?: string }>>('events.json', [])
+  const posters = new Map<string, string>()
+  for (const seed of seeds) {
+    if (seed.slug && seed.posterImage) posters.set(seed.slug, seed.posterImage)
+  }
+  if (!posters.size || !db) return
+
+  const rows = all<{ id: string; slug: string; data: string }>('SELECT id, slug, data FROM events')
+  let changed = false
+  for (const row of rows) {
+    let data: Record<string, unknown>
+    try {
+      data = JSON.parse(row.data)
+    } catch {
+      continue
+    }
+    const slug = (typeof data.slug === 'string' && data.slug) || row.slug
+    const poster = posters.get(slug)
+    if (!poster || data.posterImage) continue
+    data.posterImage = poster
+    db.run('UPDATE events SET data = ? WHERE id = ?', [JSON.stringify(data), row.id])
+    changed = true
+  }
+  if (changed) persistNow()
+}
+
 function migrateFromJsonIfNeeded() {
   const flag = get<{ value: string }>('SELECT value FROM meta WHERE key = ?', ['migrated_json_v1'])
   if (flag?.value === '1') {
     seedUsersIfEmpty()
+    applyPosterImagesFromSeed()
     return
   }
 
@@ -228,6 +257,7 @@ function migrateFromJsonIfNeeded() {
   }
 
   seedUsersIfEmpty()
+  applyPosterImagesFromSeed()
   run('INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)', ['migrated_json_v1', '1'])
   persistNow()
   console.log('[db] Migrated JSON → SQLite (.data/ticketshop.sqlite)')

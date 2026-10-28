@@ -4,11 +4,21 @@
     class="card group flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-md"
   >
     <div
-      class="relative flex h-48 items-center justify-center text-6xl sm:h-52"
+      class="relative flex h-48 items-center justify-center overflow-hidden text-6xl sm:h-52"
       :style="{ background: event.posterColor }"
     >
-      <span class="pointer-events-none absolute inset-3 rounded-xl border border-white/45" aria-hidden="true" />
-      <span class="relative">{{ event.bannerEmoji }}</span>
+      <img
+        v-if="event.posterImage"
+        :src="event.posterImage"
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+        loading="lazy"
+        decoding="async"
+      />
+      <template v-else>
+        <span class="pointer-events-none absolute inset-3 rounded-xl border border-white/45" aria-hidden="true" />
+        <span class="relative">{{ event.bannerEmoji }}</span>
+      </template>
     </div>
     <div class="flex flex-1 flex-col p-5">
       <div class="flex items-start justify-between gap-3">

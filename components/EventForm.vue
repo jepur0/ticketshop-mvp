@@ -154,6 +154,7 @@ function save() {
     promo: form.promo,
     organizer: form.organizer,
     posterColor: form.posterColor,
+    posterImage: props.event?.posterImage || '',
     bannerEmoji: form.bannerEmoji,
     description: form.description,
     tags: form.tags,

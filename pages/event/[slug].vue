@@ -14,11 +14,20 @@
       <div class="min-w-0">
         <div class="mb-8 overflow-hidden rounded-2xl border border-slate-200/80 shadow-sm">
           <div
-            class="relative flex h-52 items-center justify-center text-7xl sm:h-72 sm:text-8xl"
+            class="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden text-7xl sm:aspect-[16/10] sm:text-8xl"
             :style="{ background: event.posterColor }"
           >
-            <span class="pointer-events-none absolute inset-4 rounded-xl border border-white/50 sm:inset-6" aria-hidden="true" />
-            <span class="relative">{{ event.bannerEmoji }}</span>
+            <img
+              v-if="event.posterImage"
+              :src="event.posterImage"
+              :alt="event.title"
+              class="absolute inset-0 h-full w-full object-cover"
+              decoding="async"
+            />
+            <template v-else>
+              <span class="pointer-events-none absolute inset-4 rounded-xl border border-white/50 sm:inset-6" aria-hidden="true" />
+              <span class="relative">{{ event.bannerEmoji }}</span>
+            </template>
           </div>
         </div>
         <p class="eyebrow mb-3 break-words">{{ event.city }} · {{ event.venue }}</p>
