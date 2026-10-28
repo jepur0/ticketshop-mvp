@@ -1,13 +1,13 @@
 <template>
-  <div class="mx-auto max-w-3xl px-4 py-10">
-    <div v-if="pending" class="card p-8 text-center text-slate-500">Bestellung wird geladen…</div>
-    <div v-else-if="!order" class="card p-8 text-center text-slate-500">
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:py-16">
+    <div v-if="pending" class="card p-12 text-center text-slate-500">Bestellung wird geladen…</div>
+    <div v-else-if="!order" class="card p-12 text-center text-slate-500">
       Bestellung nicht gefunden.
-      <NuxtLink to="/" class="block mt-3 text-blue-700 underline">Startseite</NuxtLink>
+      <NuxtLink to="/" class="link mt-4 inline-flex">Startseite</NuxtLink>
     </div>
-    <div v-else class="card p-5 text-center sm:p-8">
-      <p class="text-4xl mb-3">{{ order.status === 'paid' ? '✅' : '⏳' }}</p>
-      <h1 class="text-xl font-bold" :class="order.status === 'paid' ? 'text-emerald-700' : 'text-amber-700'">
+    <div v-else class="card px-5 py-10 text-center sm:px-10 sm:py-14">
+      <p class="mb-4 text-3xl">{{ order.status === 'paid' ? '✅' : '⏳' }}</p>
+      <h1 class="text-3xl font-semibold" :class="order.status === 'paid' ? 'text-emerald-800' : 'text-amber-800'">
         {{ order.status === 'paid' ? 'Zahlung erfolgreich' : `Status: ${order.status}` }}
       </h1>
       <p class="mt-2 break-all text-slate-600">Bestellnr. <strong>{{ order.id }}</strong> · {{ order.payment }}</p>
@@ -17,10 +17,10 @@
         <div
           v-for="t in tickets"
           :key="t.code"
-          class="rounded-xl border border-slate-200 bg-slate-50 p-4 text-left"
+          class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-left"
         >
           <p class="text-xs text-slate-400 mb-2">QR / Ticket</p>
-          <div class="h-28 w-28 mx-auto bg-slate-900 text-white flex items-center justify-center font-mono text-[10px] break-all p-2 rounded-lg">
+          <div class="mx-auto flex h-28 w-28 items-center justify-center break-all rounded-2xl bg-slate-900 p-2 font-mono text-[10px] text-white">
             {{ t.code }}
           </div>
           <p class="mt-3 text-sm font-medium text-center">{{ t.label }}</p>

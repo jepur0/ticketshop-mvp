@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold mb-1">Users</h1>
+    <h1 class="mb-1 text-3xl font-semibold">Users</h1>
     <p class="text-sm text-slate-500 mb-6">SQLite users (bcrypt). Seed: admin / scanner / client @ticketshop.local</p>
     <div v-if="error" class="mb-4 text-sm text-red-600">{{ error }}</div>
     <div class="space-y-3 md:hidden">

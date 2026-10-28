@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-slate-900 mb-1">{{ title }}</h1>
+    <h1 class="mb-1 text-3xl font-semibold text-slate-900">{{ title }}</h1>
     <p v-if="subtitle" class="text-sm text-slate-500 mb-6">{{ subtitle }}</p>
     <div class="card p-8 text-center text-slate-500">
       <p class="text-3xl mb-3">🚧</p>

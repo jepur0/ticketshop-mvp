@@ -3,13 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --brand: #1a56db;
-  --brand-dark: #1e429f;
-  --accent: #f59e0b;
+  --ink: #111827;
+  --paper: #f8fafc;
+  --accent-warm: #d97706;
+}
+
+html {
+  font-family: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+  @apply bg-slate-50 text-slate-600 antialiased;
+  font-size: 15px;
+  line-height: 1.65;
+  background-color: var(--paper);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply tracking-tight text-slate-900;
+}
+
+::selection {
+  background: #e2e8f0;
+  color: var(--ink);
 }
 
 /* 16px on phones stops iOS from zooming the page when a field is focused. */
@@ -21,26 +40,70 @@ body {
   }
 }
 
+.font-display {
+  font-family: "Newsreader", "Iowan Old Style", Palatino, Georgia, serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.03em;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.page-title {
+  @apply text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl;
+}
+
+.page-dek {
+  @apply mt-3 max-w-xl text-base leading-relaxed text-slate-600;
+}
+
+.link {
+  @apply font-medium text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors;
+}
+
+.link:hover {
+  @apply decoration-slate-900;
+}
+
 .btn-primary {
-  @apply inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 transition disabled:opacity-50;
+  @apply inline-flex min-h-11 items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium tracking-tight text-white shadow-sm transition hover:bg-slate-800 disabled:opacity-50;
 }
 
 .btn-secondary {
-  @apply inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition;
+  @apply inline-flex min-h-11 items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium tracking-tight text-slate-900 shadow-sm transition hover:border-slate-300 hover:bg-slate-50;
 }
 
 .btn-danger {
-  @apply inline-flex min-h-11 items-center justify-center rounded-lg bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-700 transition;
+  @apply inline-flex min-h-11 items-center justify-center rounded-full bg-rose-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-rose-700;
+}
+
+/* Dense controls inside desktop tables. Phones keep the 44px tap target. */
+@media (min-width: 768px) {
+  .btn-inline {
+    min-height: 2.25rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+  }
 }
 
 .card {
-  @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+  @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm;
 }
 
 .input {
-  @apply w-full min-h-11 rounded-lg border border-slate-300 px-3 py-2.5 text-base focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 sm:text-sm;
+  @apply w-full min-h-11 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-base text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10;
 }
 
 .label {
-  @apply mb-1 block text-sm font-medium text-slate-700;
+  @apply mb-1.5 block text-sm font-medium text-slate-700;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-800;
 }

@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
-      <div v-for="s in stats" :key="s.label" class="card p-4">
-        <p class="text-xs uppercase tracking-wide text-slate-400">{{ s.label }}</p>
-        <p class="text-2xl font-bold mt-1">{{ s.value }}</p>
+    <h1 class="mb-6 text-3xl font-semibold">Dashboard</h1>
+    <div class="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div v-for="s in stats" :key="s.label" class="card p-5">
+        <p class="eyebrow">{{ s.label }}</p>
+        <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">{{ s.value }}</p>
       </div>
     </div>
 
-    <div class="card p-4 mb-8 text-sm text-slate-600 flex flex-wrap gap-3 items-center">
-      <span class="font-medium text-slate-800">Schnellzugriff:</span>
-      <NuxtLink to="/admin/settings" class="text-blue-700 underline">Settings (API keys)</NuxtLink>
-      <NuxtLink to="/admin/monitoring" class="text-blue-700 underline">Monitoring</NuxtLink>
-      <NuxtLink to="/admin/scanner" class="text-blue-700 underline">Scanner</NuxtLink>
-      <NuxtLink to="/admin/payouts" class="text-blue-700 underline">Payouts</NuxtLink>
+    <div class="card mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 p-4 text-sm text-slate-600 sm:p-5">
+      <span class="font-medium text-slate-900">Schnellzugriff:</span>
+      <NuxtLink to="/admin/settings" class="link">Settings (API keys)</NuxtLink>
+      <NuxtLink to="/admin/monitoring" class="link">Monitoring</NuxtLink>
+      <NuxtLink to="/admin/scanner" class="link">Scanner</NuxtLink>
+      <NuxtLink to="/admin/payouts" class="link">Payouts</NuxtLink>
     </div>
 
     <h2 class="text-lg font-semibold mb-3">Ops-Tools</h2>
@@ -22,7 +22,7 @@
         v-for="op in ops"
         :key="op"
         type="button"
-        class="card px-4 py-3 text-left text-sm hover:border-blue-300 hover:bg-blue-50 transition"
+        class="card px-4 py-3 text-left text-sm text-slate-700 transition hover:border-slate-300 hover:shadow-md"
         @click="runOp(op)"
       >
         {{ op }}

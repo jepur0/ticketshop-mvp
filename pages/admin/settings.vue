@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-3xl">
-    <h1 class="text-2xl font-bold text-slate-900 mb-1">Settings</h1>
+    <h1 class="mb-1 text-3xl font-semibold text-slate-900">Settings</h1>
     <p class="text-sm text-slate-500 mb-6">
       API-Schlüssel (seats.io, Stripe, E-Mail) und Firmendaten für Impressum.
       Secrets maskiert in SQLite (<code class="text-xs bg-slate-100 px-1 rounded">.data/ticketshop.sqlite</code>).

@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-xl">
-    <h1 class="text-2xl font-bold mb-1">QR Scanner</h1>
+    <h1 class="mb-1 text-3xl font-semibold">QR Scanner</h1>
     <p class="text-sm text-slate-500 mb-2">Code manuell eingeben oder Kamera (wenn erlaubt).</p>
     <p class="mb-6 text-sm text-slate-400 break-words">
       PWA: auf dem Handy „Zum Home-Bildschirm“ / Install.

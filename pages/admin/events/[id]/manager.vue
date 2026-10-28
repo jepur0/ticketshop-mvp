@@ -1,8 +1,8 @@
 <template>
   <div v-if="event">
     <div class="mb-6">
-      <NuxtLink to="/admin/events" class="text-sm text-blue-700 hover:underline">← Events</NuxtLink>
-      <h1 class="mt-2 text-2xl font-bold break-words">Event manager — {{ event.title }}</h1>
+      <NuxtLink to="/admin/events" class="link text-sm">← Events</NuxtLink>
+      <h1 class="mt-3 break-words text-3xl font-semibold">Event manager — {{ event.title }}</h1>
       <p class="text-sm text-slate-500">Ops für dieses Event (Stubs)</p>
     </div>
     <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -10,7 +10,7 @@
         v-for="op in ops"
         :key="op"
         type="button"
-        class="card px-4 py-3 text-left text-sm hover:bg-blue-50"
+        class="card px-4 py-3 text-left text-sm text-slate-700 transition hover:border-slate-300 hover:shadow-md"
         @click="msg = `✓ ${op} @ ${event.title} (stub)`"
       >
         {{ op }}

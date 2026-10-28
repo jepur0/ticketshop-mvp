@@ -1,9 +1,10 @@
 <template>
-  <div class="mx-auto max-w-lg px-4 py-10">
-    <h1 class="text-2xl font-bold mb-2">Tickets finden</h1>
-    <p class="text-sm text-slate-500 mb-6">Bezahlte Tickets aus dem Orders-Store erneut anzeigen / „zusenden“.</p>
+  <div class="mx-auto max-w-lg px-4 py-12 sm:py-16">
+    <p class="eyebrow">Hilfe</p>
+    <h1 class="page-title mt-3">Tickets finden</h1>
+    <p class="page-dek mb-8">Bezahlte Tickets aus dem Orders-Store erneut anzeigen / „zusenden“.</p>
 
-    <form v-if="!result" class="card p-6 space-y-4" @submit.prevent="submit">
+    <form v-if="!result" class="card space-y-4 p-6 sm:p-8" @submit.prevent="submit">
       <div>
         <label class="label">Event (optional)</label>
         <select v-model="eventId" class="input">

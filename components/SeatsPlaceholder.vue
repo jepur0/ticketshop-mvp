@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-3 sm:p-4">
+  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3 sm:p-4">
     <!--
       REAL seats.io embed:
       1. Load https://cdn.seats.io/chart.js

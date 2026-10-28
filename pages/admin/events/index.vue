@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
       <div>
-        <h1 class="text-2xl font-bold">Events</h1>
+        <h1 class="text-3xl font-semibold">Events</h1>
         <p class="text-sm text-slate-500">Combined (Chart) vs Simple (ohne Chart)</p>
       </div>
       <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
@@ -31,7 +31,7 @@
             <p class="font-medium break-words">{{ e.title }}</p>
             <p class="text-xs text-slate-400">
               {{ e.city }} ·
-              <span :class="e.type === 'combined' ? 'text-blue-600' : 'text-slate-500'">
+              <span :class="e.type === 'combined' ? 'font-medium text-slate-800' : 'text-slate-500'">
                 {{ e.type === 'combined' ? 'Combined' : 'Simple' }}
               </span>
             </p>
@@ -52,7 +52,7 @@
               :class="e.active ? 'translate-x-6' : 'translate-x-1'"
             />
           </button>
-          <span v-if="e.promo" class="text-xs font-bold text-amber-700">PROMO</span>
+          <span v-if="e.promo" class="badge">Promo</span>
           <span v-else class="text-xs text-slate-300">—</span>
         </div>
         <div class="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2">
@@ -107,27 +107,27 @@
               <p class="font-medium">{{ e.title }}</p>
               <p class="text-xs text-slate-400">
                 {{ e.city }} ·
-                <span :class="e.type === 'combined' ? 'text-blue-600' : 'text-slate-500'">
+                <span :class="e.type === 'combined' ? 'font-medium text-slate-800' : 'text-slate-500'">
                   {{ e.type === 'combined' ? 'Combined' : 'Simple' }}
                 </span>
               </p>
             </td>
             <td class="px-3 py-2 whitespace-nowrap text-xs">{{ formatDate(e.date) }}</td>
             <td class="px-3 py-2">
-              <span v-if="e.promo" class="text-xs font-bold text-amber-700">PROMO</span>
+              <span v-if="e.promo" class="badge">Promo</span>
               <span v-else class="text-xs text-slate-300">—</span>
             </td>
             <td class="px-3 py-2 text-xs">{{ e.organizer }}</td>
             <td class="px-3 py-2">
               <div class="flex flex-wrap gap-1 max-w-xs">
-                <NuxtLink :to="`/admin/events/${e.id}`" class="btn-secondary !py-1 !px-2 !text-[10px]">Edit</NuxtLink>
-                <button type="button" class="btn-danger" @click="onDelete(e.id)">Delete</button>
-                <NuxtLink :to="`/admin/events/${e.id}/manager`" class="btn-secondary !py-1 !px-2 !text-[10px]">Event manager</NuxtLink>
-                <a :href="`/event/${e.slug}`" target="_blank" class="btn-secondary !py-1 !px-2 !text-[10px]">Live link</a>
-                <button type="button" class="btn-secondary !py-1 !px-2 !text-[10px]" @click="toast(`Export orders: ${e.title}`)">Export orders</button>
-                <button type="button" class="btn-secondary !py-1 !px-2 !text-[10px]" @click="toast(`Export customers: ${e.title}`)">Export customers</button>
-                <button type="button" class="btn-secondary !py-1 !px-2 !text-[10px]" @click="toast(`Tickets scanned: ${e.title}`)">Tickets scanned</button>
-                <button type="button" class="btn-secondary !py-1 !px-2 !text-[10px]" @click="toast(`Export QR: ${e.title}`)">Export QR codes</button>
+                <NuxtLink :to="`/admin/events/${e.id}`" class="btn-secondary btn-inline">Edit</NuxtLink>
+                <button type="button" class="btn-danger btn-inline" @click="onDelete(e.id)">Delete</button>
+                <NuxtLink :to="`/admin/events/${e.id}/manager`" class="btn-secondary btn-inline">Event manager</NuxtLink>
+                <a :href="`/event/${e.slug}`" target="_blank" class="btn-secondary btn-inline">Live link</a>
+                <button type="button" class="btn-secondary btn-inline" @click="toast(`Export orders: ${e.title}`)">Export orders</button>
+                <button type="button" class="btn-secondary btn-inline" @click="toast(`Export customers: ${e.title}`)">Export customers</button>
+                <button type="button" class="btn-secondary btn-inline" @click="toast(`Tickets scanned: ${e.title}`)">Tickets scanned</button>
+                <button type="button" class="btn-secondary btn-inline" @click="toast(`Export QR: ${e.title}`)">Export QR codes</button>
               </div>
             </td>
           </tr>

@@ -1,18 +1,22 @@
 <template>
-  <NuxtLink :to="`/event/${event.slug}`" class="card overflow-hidden hover:shadow-md transition group">
+  <NuxtLink
+    :to="`/event/${event.slug}`"
+    class="card group flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-md"
+  >
     <div
-      class="h-36 flex items-center justify-center text-5xl"
+      class="relative flex h-48 items-center justify-center text-6xl sm:h-52"
       :style="{ background: event.posterColor }"
     >
-      <span>{{ event.bannerEmoji }}</span>
+      <span class="pointer-events-none absolute inset-3 rounded-xl border border-white/45" aria-hidden="true" />
+      <span class="relative">{{ event.bannerEmoji }}</span>
     </div>
-    <div class="p-4">
-      <div class="flex items-start justify-between gap-2">
-        <h3 class="font-semibold leading-snug text-slate-900 break-words group-hover:text-blue-700">{{ event.title }}</h3>
-        <span v-if="event.promo" class="shrink-0 text-[10px] font-bold uppercase bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Promo</span>
+    <div class="flex flex-1 flex-col p-5">
+      <div class="flex items-start justify-between gap-3">
+        <p class="text-xs tracking-wide text-slate-400">{{ event.city }} · {{ formatDate(event.date) }}</p>
+        <span v-if="event.promo" class="badge shrink-0">Promo</span>
       </div>
-      <p class="mt-1 text-sm text-slate-500">{{ event.city }} · {{ formatDate(event.date) }}</p>
-      <p class="mt-2 text-sm font-medium text-blue-800">ab {{ minPrice }} €</p>
+      <h3 class="mt-2 text-lg font-medium leading-snug text-slate-900 break-words">{{ event.title }}</h3>
+      <p class="mt-auto pt-4 text-sm text-slate-500">ab {{ minPrice }} €</p>
     </div>
   </NuxtLink>
 </template>

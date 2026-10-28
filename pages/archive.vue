@@ -1,6 +1,8 @@
 <template>
-  <div class="mx-auto max-w-6xl px-4 py-10">
-    <h1 class="text-2xl font-bold mb-6">Alle Events</h1>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+    <p class="eyebrow">Programm</p>
+    <h1 class="page-title mt-3">Alle Events</h1>
+    <p class="page-dek mb-8">Konzerte und Veranstaltungen im Überblick.</p>
     <div class="mb-8 grid gap-3 sm:flex sm:flex-wrap sm:items-center">
       <select v-model="city" class="input sm:w-auto">
         <option value="">Alle Städte</option>

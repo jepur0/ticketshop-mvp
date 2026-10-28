@@ -6,7 +6,7 @@
     <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:flex-row sm:items-center sm:justify-between">
       <p class="text-sm text-slate-600">
         Essenzielle Cookies sind nötig für Warenkorb/Login. Statistik & Marketing nur mit Zustimmung.
-        <NuxtLink to="/page/datenschutz" class="text-blue-700 underline">Datenschutz</NuxtLink>.
+        <NuxtLink to="/page/datenschutz" class="link">Datenschutz</NuxtLink>.
       </p>
       <div class="flex shrink-0 flex-col gap-2 sm:flex-row sm:flex-wrap">
         <button type="button" class="btn-secondary w-full sm:w-auto" @click="set('essential')">Nur essenziell</button>

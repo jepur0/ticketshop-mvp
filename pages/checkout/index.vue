@@ -1,18 +1,18 @@
 <template>
-  <div class="mx-auto max-w-3xl px-4 py-6 sm:py-10">
-    <h1 class="text-2xl font-bold mb-6">Kasse</h1>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:py-16">
+    <h1 class="page-title mb-8">Kasse</h1>
 
-    <div v-if="route.query.canceled" class="mb-4 rounded-lg bg-amber-50 text-amber-800 text-sm px-4 py-3">
+    <div v-if="route.query.canceled" class="mb-4 rounded-2xl border border-amber-100 bg-amber-50 px-4 py-3 text-sm text-amber-900">
       Zahlung abgebrochen. Du kannst es erneut versuchen.
     </div>
-    <div v-if="error" class="mb-4 rounded-lg bg-red-50 text-red-700 text-sm px-4 py-3">{{ error }}</div>
+    <div v-if="error" class="mb-4 rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-700">{{ error }}</div>
 
-    <div v-if="!items.length" class="card p-5 text-center text-slate-500 sm:p-8">
-      Warenkorb ist leer. <NuxtLink to="/archive" class="text-blue-700 underline">Events ansehen</NuxtLink>
+    <div v-if="!items.length" class="card p-8 text-center text-slate-500 sm:p-12">
+      Warenkorb ist leer. <NuxtLink to="/archive" class="link">Events ansehen</NuxtLink>
     </div>
     <form v-else class="grid gap-6 sm:grid-cols-2" @submit.prevent="pay">
-      <div class="sm:col-span-2 card space-y-4 p-4 sm:p-5">
-        <h2 class="font-semibold">Gast-Checkout</h2>
+      <div class="card space-y-4 p-5 sm:col-span-2 sm:p-6">
+        <h2 class="text-lg font-semibold">Gast-Checkout</h2>
         <div>
           <label class="label" for="checkout-name">Name *</label>
           <input id="checkout-name" v-model="form.name" required class="input" autocomplete="name" />
@@ -26,15 +26,15 @@
           <input id="checkout-phone" v-model="form.phone" type="tel" class="input" autocomplete="tel" />
         </div>
       </div>
-      <div class="sm:col-span-2 card p-4 sm:p-5">
-        <h2 class="font-semibold mb-3">Bestellübersicht</h2>
+      <div class="card p-5 sm:col-span-2 sm:p-6">
+        <h2 class="mb-4 text-lg font-semibold">Bestellübersicht</h2>
         <ul class="space-y-2 text-sm mb-4">
           <li v-for="(item, i) in items" :key="i" class="flex justify-between gap-3">
             <span class="min-w-0 break-words">{{ item.eventTitle }} — {{ item.label }}</span>
             <span class="shrink-0 font-medium">{{ item.price }} €</span>
           </li>
         </ul>
-        <div class="flex justify-between font-bold text-lg border-t pt-3">
+        <div class="flex justify-between border-t border-slate-100 pt-4 text-lg font-semibold tracking-tight text-slate-900">
           <span>Gesamt</span>
           <span>{{ total }} €</span>
         </div>

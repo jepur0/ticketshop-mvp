@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+  <div class="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm">
     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3">
       <p class="text-sm font-semibold text-slate-700">
         Sitzplan

@@ -2,7 +2,7 @@
   <div v-if="event" class="mx-auto max-w-6xl px-4 py-6 sm:py-8">
     <div
       v-if="eventItems.length"
-      class="sticky top-[61px] z-30 mb-4 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm sm:top-[69px] lg:hidden"
+      class="sticky top-[61px] z-30 mb-4 flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 shadow-md backdrop-blur sm:top-[69px] lg:hidden"
     >
       <div class="min-w-0 flex-1">
         <p class="text-xs text-slate-500">{{ eventItems.length }} {{ eventItems.length === 1 ? 'Ticket' : 'Tickets' }}</p>
@@ -12,20 +12,23 @@
     </div>
     <div class="grid gap-8 lg:grid-cols-[1fr_320px]">
       <div class="min-w-0">
-        <div
-          class="rounded-2xl h-40 sm:h-56 flex items-center justify-center text-6xl sm:text-7xl mb-6"
-          :style="{ background: event.posterColor }"
-        >
-          {{ event.bannerEmoji }}
+        <div class="mb-8 overflow-hidden rounded-2xl border border-slate-200/80 shadow-sm">
+          <div
+            class="relative flex h-52 items-center justify-center text-7xl sm:h-72 sm:text-8xl"
+            :style="{ background: event.posterColor }"
+          >
+            <span class="pointer-events-none absolute inset-4 rounded-xl border border-white/50 sm:inset-6" aria-hidden="true" />
+            <span class="relative">{{ event.bannerEmoji }}</span>
+          </div>
         </div>
-        <p class="text-sm font-medium text-blue-700 mb-1 break-words">{{ event.city }} · {{ event.venue }}</p>
-        <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 break-words">{{ event.title }}</h1>
-        <p class="text-slate-500 mt-1 break-words">{{ event.subtitle }}</p>
-        <p class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-600">
+        <p class="eyebrow mb-3 break-words">{{ event.city }} · {{ event.venue }}</p>
+        <h1 class="break-words text-3xl font-semibold text-slate-900 sm:text-5xl">{{ event.title }}</h1>
+        <p class="mt-3 break-words text-lg text-slate-500">{{ event.subtitle }}</p>
+        <p class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600">
           <span>{{ formatDate(event.date) }}</span>
-          <a v-if="event.venueMapsUrl" :href="event.venueMapsUrl" target="_blank" class="inline-flex min-h-11 items-center text-blue-700 underline sm:min-h-0">Karte</a>
+          <a v-if="event.venueMapsUrl" :href="event.venueMapsUrl" target="_blank" class="link inline-flex min-h-11 items-center sm:min-h-0">Karte</a>
         </p>
-        <p class="mt-6 text-slate-700 leading-relaxed whitespace-pre-line">{{ event.description }}</p>
+        <p class="mt-8 leading-relaxed whitespace-pre-line text-slate-600">{{ event.description }}</p>
 
         <div class="mt-8">
           <SeatsChart
@@ -61,9 +64,9 @@
         </div>
       </div>
 
-      <aside class="lg:sticky lg:top-20 h-fit">
-        <div class="card p-5">
-          <h2 class="font-semibold mb-3">Warenkorb</h2>
+      <aside class="h-fit lg:sticky lg:top-24">
+        <div class="card p-5 sm:p-6">
+          <h2 class="mb-4 text-lg font-semibold">Warenkorb</h2>
           <p v-if="!eventItems.length" class="text-sm text-slate-400">Noch keine Tickets gewählt.</p>
           <ul v-else class="mb-4 space-y-2">
             <li v-for="(item, i) in eventItems" :key="i" class="flex items-center gap-2 border-b border-slate-100 pb-2 text-sm">
@@ -96,7 +99,7 @@
     </div>
   </div>
   <div v-else class="mx-auto max-w-6xl px-4 py-20 text-center text-slate-500">
-    Event nicht gefunden. <NuxtLink to="/archive" class="text-blue-700 underline">Zur Übersicht</NuxtLink>
+    Event nicht gefunden. <NuxtLink to="/archive" class="link">Zur Übersicht</NuxtLink>
   </div>
 </template>
 

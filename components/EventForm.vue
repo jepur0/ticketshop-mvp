@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NuxtLink to="/admin/events" class="text-sm text-blue-700 hover:underline">← Events</NuxtLink>
-    <h1 class="mt-2 mb-6 text-2xl font-bold break-words">
+    <NuxtLink to="/admin/events" class="link text-sm">← Events</NuxtLink>
+    <h1 class="mb-6 mt-3 break-words text-3xl font-semibold">
       {{ mode === 'create' ? 'Neues Event' : 'Event bearbeiten' }}
       <span class="ml-2 text-sm font-normal text-slate-400">({{ form.type }})</span>
     </h1>

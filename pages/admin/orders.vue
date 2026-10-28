@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <h1 class="text-2xl font-bold">Orders</h1>
+      <h1 class="text-3xl font-semibold">Orders</h1>
       <button type="button" class="btn-secondary w-full sm:w-auto" @click="refresh()">Aktualisieren</button>
     </div>
     <div class="space-y-3 md:hidden">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold mb-1">Payouts</h1>
+    <h1 class="mb-1 text-3xl font-semibold">Payouts</h1>
     <p class="text-sm text-slate-500 mb-4">{{ data?.note }}</p>
 
     <div v-if="data?.connect" class="card p-4 mb-6 text-sm">
