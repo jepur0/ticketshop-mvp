@@ -24,12 +24,25 @@ function dbPath() {
   return join(process.cwd(), '.data', 'ticketshop.sqlite')
 }
 
+/** Path sql.js will `open()`. Prefer the traced Nitro copy, then the real package. */
+function locateSqlFile(file: string): string {
+  const traced = join(dirname(require.resolve('sql.js')), file)
+  if (existsSync(traced)) return traced
+  const fallbacks = [
+    join(process.cwd(), '.output', 'server', 'node_modules', 'sql.js', 'dist', file),
+    join(process.cwd(), 'node_modules', 'sql.js', 'dist', file)
+  ]
+  for (const candidate of fallbacks) {
+    if (existsSync(candidate)) return candidate
+  }
+  return traced
+}
+
 async function loadSqlJs(): Promise<SqlJsStatic> {
   if (SQL) return SQL
   const initSqlJs = (await import('sql.js')).default
-  const wasmDir = dirname(require.resolve('sql.js'))
   SQL = await initSqlJs({
-    locateFile: (file: string) => join(wasmDir, file)
+    locateFile: (file: string) => locateSqlFile(file)
   })
   return SQL
 }

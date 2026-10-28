@@ -14,11 +14,26 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    // sql.js ships wasm; keep external so Node can resolve locateFile
+    // Keep sql.js external so Node can open the wasm from disk.
+    // nft does not follow locateFile('sql-wasm.wasm'); the compiled hook
+    // and the postbuild script copy that binary into the server output.
     externals: {
-      traceInclude: ['node_modules/sql.js/**']
+      traceInclude: ['sql.js']
     },
-    moduleSideEffects: ['sql.js']
+    moduleSideEffects: ['sql.js'],
+    hooks: {
+      async compiled(nitro) {
+        if (nitro.options.dev) return
+        const { pathToFileURL } = await import('node:url')
+        const { join } = await import('node:path')
+        const script = pathToFileURL(join(nitro.options.rootDir, 'scripts', 'copy-sql-wasm.mjs')).href
+        const { copySqlWasm } = await import(script)
+        copySqlWasm({
+          serverDir: nitro.options.output.serverDir,
+          rootDir: nitro.options.rootDir
+        })
+      }
+    }
   },
   vite: {
     optimizeDeps: {
