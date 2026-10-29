@@ -44,8 +44,16 @@
           <strong v-else-if="integrations?.otpVpos?.enabled">OTP VPOS (Stub → Mock)</strong>
           <strong v-else>Demo Mock (kein Stripe Key)</strong>
         </p>
+        <div>
+          <label class="label" for="checkout-promo">Promo-Code</label>
+          <div class="flex gap-2">
+            <input id="checkout-promo" v-model="promoCode" class="input font-mono uppercase" autocomplete="off" />
+            <button type="button" class="btn-secondary shrink-0" @click="checkPromo">Prüfen</button>
+          </div>
+          <p v-if="promoNote" class="mt-2 text-sm" :class="promoOk ? 'text-emerald-700' : 'text-red-700'">{{ promoNote }}</p>
+        </div>
         <button type="submit" class="btn-primary w-full mt-4" :disabled="paying">
-          {{ paying ? 'Wird verarbeitet…' : `Jetzt zahlen (${total} €)` }}
+          {{ paying ? 'Wird verarbeitet…' : `Jetzt zahlen (${payable} €)` }}
         </button>
       </div>
     </form>
@@ -65,6 +73,40 @@ watchEffect(() => {
 const form = reactive({ name: '', email: '', phone: '' })
 const paying = ref(false)
 const error = ref('')
+const promoCode = ref('')
+const promoNote = ref('')
+const promoOk = ref(false)
+const discount = ref(0)
+const payable = computed(() => Math.max(0, Math.round((total.value - discount.value) * 100) / 100))
+const affiliateRef = useState<string>('affiliate-ref', () => '')
+
+watch(promoCode, () => {
+  discount.value = 0
+  promoOk.value = false
+  promoNote.value = ''
+})
+
+async function checkPromo() {
+  promoNote.value = ''
+  discount.value = 0
+  promoOk.value = false
+  if (!promoCode.value.trim()) return
+  try {
+    const res = await $fetch<any>('/api/public/promo', {
+      method: 'POST',
+      body: {
+        promoCode: promoCode.value,
+        eventId: items.value[0]?.eventId,
+        items: items.value.map((i) => ({ price: i.price, label: i.label }))
+      }
+    })
+    discount.value = res.discount || 0
+    promoOk.value = true
+    promoNote.value = discount.value ? `Rabatt ${discount.value} € · neu ${res.total} €` : 'Code gültig, kein Rabatt'
+  } catch (e: any) {
+    promoNote.value = e?.data?.statusMessage || 'Code ungültig'
+  }
+}
 
 async function ensureHold() {
   if (holdMeta.value.holdId) return holdMeta.value.holdId
@@ -100,7 +142,9 @@ async function pay() {
       eventSlug: items.value[0]?.eventSlug,
       holdId,
       seatsHoldToken: holdMeta.value.seatsHoldToken,
-      seatsEventKey: items.value[0]?.eventId
+      seatsEventKey: items.value[0]?.eventId,
+      promoCode: promoCode.value.trim(),
+      affiliateRef: affiliateRef.value
     }
 
     if ((integrations.value as any)?.stripe?.enabled) {

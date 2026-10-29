@@ -1,6 +1,7 @@
 import { readOrders, writeOrders, readHolds, writeHolds, logFailedPayment } from '../../utils/store'
 import { fulfillPaidOrder } from '../../utils/tickets'
 import { readSettings } from '../../utils/settings'
+import { priceCheckoutBody } from '../../utils/checkout-price'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -16,9 +17,10 @@ export default defineEventHandler(async (event) => {
       throw createError({ statusCode: 400, statusMessage: 'orderId or customer+items required' })
     }
     const { newId } = await import('../../utils/store')
+    const priced = await priceCheckoutBody(body)
     order = {
       id: newId('ord'),
-      eventId: String(body.eventId || body.items[0]?.eventId || ''),
+      eventId: priced.eventId,
       eventTitle: String(body.eventTitle || body.items[0]?.eventTitle || 'Event'),
       eventSlug: body.eventSlug,
       createdAt: new Date().toISOString(),
@@ -29,13 +31,17 @@ export default defineEventHandler(async (event) => {
         email: String(body.customer.email),
         phone: body.customer.phone || ''
       },
-      items: body.items.map((i: any) => ({
-        label: String(i.label),
-        price: Number(i.price),
+      items: priced.items.map((i) => ({
+        label: i.label,
+        price: i.price,
         seatId: i.seatId ?? null,
         categoryId: i.categoryId
       })),
-      total: body.items.reduce((s: number, i: any) => s + Number(i.price || 0), 0),
+      subtotal: priced.subtotal,
+      discount: priced.discount,
+      promoCode: priced.promoCode,
+      affiliateRef: priced.affiliateRef,
+      total: priced.total,
       fees: 0,
       holdIds: body.holdId ? [body.holdId] : [],
       seatsHoldToken: body.seatsHoldToken || null

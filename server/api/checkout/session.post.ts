@@ -1,6 +1,7 @@
 import Stripe from 'stripe'
 import { readSettings } from '../../utils/settings'
 import { readOrders, writeOrders, newId, logFailedPayment, type OrderRecord } from '../../utils/store'
+import { priceCheckoutBody } from '../../utils/checkout-price'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -10,11 +11,11 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'customer + items required' })
   }
 
+  const priced = await priceCheckoutBody(body)
   const orderId = newId('ord')
-  const total = body.items.reduce((s: number, i: any) => s + Number(i.price || 0), 0)
   const order: OrderRecord = {
     id: orderId,
-    eventId: String(body.eventId || body.items[0]?.eventId || ''),
+    eventId: priced.eventId,
     eventTitle: String(body.eventTitle || body.items[0]?.eventTitle || 'Event'),
     eventSlug: body.eventSlug || body.items[0]?.eventSlug,
     createdAt: new Date().toISOString(),
@@ -25,13 +26,17 @@ export default defineEventHandler(async (event) => {
       email: String(body.customer.email),
       phone: body.customer.phone || ''
     },
-    items: body.items.map((i: any) => ({
-      label: String(i.label),
-      price: Number(i.price),
+    items: priced.items.map((i) => ({
+      label: i.label,
+      price: i.price,
       seatId: i.seatId ?? null,
       categoryId: i.categoryId
     })),
-    total,
+    subtotal: priced.subtotal,
+    discount: priced.discount,
+    promoCode: priced.promoCode,
+    affiliateRef: priced.affiliateRef,
+    total: priced.total,
     fees: 0,
     holdIds: body.holdId ? [body.holdId] : [],
     seatsHoldToken: body.seatsHoldToken || null
@@ -84,7 +89,7 @@ export default defineEventHandler(async (event) => {
     await writeOrders(orders)
     await logFailedPayment({
       email: order.customer.email,
-      amount: total,
+      amount: priced.total,
       reason: e?.message || 'stripe_error',
       provider: 'stripe',
       orderId
