@@ -36,7 +36,7 @@ Open any-password demo is **off** unless `ALLOW_DEMO_LOGIN=true` **and** `NODE_E
 ## Admin → Settings (paste keys here)
 
 1. **seats.io** — Workspace Public Key, Secret Key, Region (`eu`/`na`/…)
-2. **Per event** — Chart Key + Event Key on Combined events
+2. **Per event** — only the seats.io **Event Key** (Saalplan). The chart key is hidden; the server reads it from the seats.io event when a Secret Key is saved.
 3. **Stripe** — Publishable, Secret, Webhook Secret → `POST /api/checkout/webhook`
 4. **Stripe Connect** — Platform + Connected account IDs (skeleton; payouts show mock split by commission %)
 5. **E-Mail** — provider `log` | `smtp` | `resend` + From / SMTP or Resend API key (PDF tickets on fulfill)
@@ -74,13 +74,14 @@ Secrets are **masked** after save. Never returned on `/api/public/*`.
 1. **Build:** `npm ci && npm run build` → run `.output/server/index.mjs` (Node 20+).
 2. **TLS:** terminate with Caddy/nginx or Fly HTTPS; set `commerce.siteUrl` to `https://…`.
 3. **Webhook:** Stripe Dashboard → `https://YOUR_DOMAIN/api/checkout/webhook` + paste `whsec_…` in Settings.
-4. **Persistence:** mount volume for `.data/` (SQLite) — without it, DB resets on redeploy.
-5. **Secrets:** prefer env/vault in production; Settings UI is fine for MVP/staging.
-6. **Hetzner:** CX22+ VPS, Docker or systemd, Caddy for TLS, daily `cp .data/ticketshop.sqlite` backup.
-7. **Fly.io:** `fly launch`, volume for `.data`, secrets via `fly secrets set`, health check `/`.
-8. **seats.io / Stripe:** create real accounts → paste keys in Admin → Settings (no code change).
-9. **Legal:** replace placeholders with lawyer-reviewed DE texts; fill Firma fields first.
-10. **SMTP:** set From domain SPF/DKIM before live ticket mail.
+4. **Persistence:** mount a volume for `.data/` (SQLite) — without it, the DB resets on redeploy. Render Free has an ephemeral disk, so this is not guaranteed there.
+5. **Event images:** the admin form accepts a poster file or an image URL. Files are stored in the SQLite table `event_posters` and served at `/api/public/posters/:eventId` (not written under `public/`, which would vanish even sooner). Pasted `http(s)` URLs are stored on the event. Uploaded bytes survive only as long as `.data/ticketshop.sqlite` does. On Render Free that file is lost when the instance redeploys or spins down, unless a persistent disk is mounted at `.data`. Seed posters in `public/images/events` ship with the build and are unaffected. A pasted image URL keeps working after a DB reset only if you enter it again; the remote file itself is not copied into git.
+6. **Secrets:** prefer env/vault in production; Settings UI is fine for MVP/staging.
+7. **Hetzner:** CX22+ VPS, Docker or systemd, Caddy for TLS, daily `cp .data/ticketshop.sqlite` backup.
+8. **Fly.io:** `fly launch`, volume for `.data`, secrets via `fly secrets set`, health check `/`.
+9. **seats.io / Stripe:** create real accounts → paste keys in Admin → Settings (no code change).
+10. **Legal:** replace placeholders with lawyer-reviewed DE texts; fill Firma fields first.
+11. **SMTP:** set From domain SPF/DKIM before live ticket mail.
 
 ## Ops
 
@@ -123,8 +124,9 @@ Internal WAW Media demo. Do not scrape or copy third-party shop CSS/images.
 1. Create a free/paid account at [seats.io](https://www.seats.io) (Region **EU** for Germany).
 2. Draw a seating chart → publish → create an **Event** for that chart → copy **Event Key**.
 3. In TicketShop: **Admin → Settings → seats.io** paste **Workspace Public Key**, **Secret Key**, Region `EU`.
-4. **Admin → Events → Edit** (type **Combined**): paste **Event Key** (and optional Chart Key). Never use `demo-*` placeholders.
-5. Buyer opens `/event/[slug]` → live Sitzplan → selects seats → hold → checkout.
+4. **Admin → Events → Neu / Bearbeiten**: choose **Saalplan (seats.io)** and paste only the **Event Key** (the one key shown on the event in the seats.io dashboard). Do not look up a chart key. Never use `demo-*` placeholders. **Ohne Sitzplan** is free seating / GA.
+5. On save, the server calls `GET /events/{eventKey}` with the workspace Secret Key, tries the configured region and then EU / NA / SA / OC, and stores `chartKey` when seats.io returns one. The public Sitzplan does not need that chart key: `SeatingChart` is created with the workspace public key and the event key only.
+6. Buyer opens `/event/[slug]` → live Sitzplan → selects seats → hold → checkout.
 
 If Workspace Key is set but Event Key is missing/`demo-*`, the shop shows the **Placeholder** (category buttons) instead of the English seats.io error “The seating chart could not be loaded”.
 
@@ -147,4 +149,4 @@ IMPORT_BASE=https://ticketshop-mvp.onrender.com \
 
 Or in the admin UI after deploy: **Events → Import ulaznice.de** (`POST /api/admin/import-ulaznice`).
 
-Imported events are `type: simple`. To enable Sitzplan later, switch to Combined and attach **your** seats.io Event Key (do not reuse ulaznice/Boommedia workspace keys).
+Imported events are `type: simple` (Ohne Sitzplan). To enable Sitzplan later, choose **Saalplan** and paste **your** seats.io Event Key (do not reuse ulaznice/Boommedia workspace keys).

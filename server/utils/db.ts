@@ -113,6 +113,12 @@ function migrateSchema() {
       expires_at TEXT NOT NULL,
       created_at TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS event_posters (
+      event_id TEXT PRIMARY KEY,
+      mime TEXT NOT NULL,
+      bytes BLOB NOT NULL,
+      updated_at TEXT NOT NULL
+    );
     CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
     CREATE INDEX IF NOT EXISTS idx_holds_status ON holds(status);
     CREATE INDEX IF NOT EXISTS idx_tickets_email ON tickets(email);

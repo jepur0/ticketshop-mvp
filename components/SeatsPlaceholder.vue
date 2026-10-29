@@ -18,8 +18,9 @@
     >
       <p class="text-4xl">{{ emoji }}</p>
       <p class="max-w-md text-sm text-slate-600 break-words">
-        Noch kein Live-Sitzplan — Workspace Key in Admin → Settings, Event Key am Event. Chart (<code class="break-all rounded bg-slate-100 px-1 text-xs">{{ chartKey || 'chartKey' }}</code> /
-        Event <code class="break-all rounded bg-slate-100 px-1 text-xs">{{ eventKey || 'eventKey' }}</code>).
+        Noch kein Live-Sitzplan. In Admin → Settings den Workspace Public Key setzen und am Event nur den
+        seats.io Event Key eintragen<span v-if="eventKey">
+          (<code class="break-all rounded bg-slate-100 px-1 text-xs">{{ eventKey }}</code>)</span>.
       </p>
       <div v-if="categories.length" class="mt-2 flex w-full flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
         <button
