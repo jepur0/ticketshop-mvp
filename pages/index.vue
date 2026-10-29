@@ -21,7 +21,7 @@
         <p class="eyebrow !text-gold-soft/90">
           <span class="!shadow-none" />Tickets online
         </p>
-        <h1 class="font-display mt-5 max-w-3xl text-[2.7rem] font-medium leading-[1.02] text-paper-soft sm:text-6xl lg:text-[4.35rem]">
+        <h1 class="font-display mt-5 max-w-3xl break-words text-[2.15rem] font-medium leading-[1.08] text-paper-soft min-[390px]:text-[2.35rem] sm:text-6xl sm:leading-[1.02] lg:text-[4.35rem]">
           Events &amp; Konzerte — <em class="not-italic text-gold-soft">einfach</em> Tickets kaufen
         </h1>
         <p class="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">

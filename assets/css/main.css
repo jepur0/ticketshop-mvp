@@ -57,7 +57,7 @@
 
 @layer components {
   .font-display {
-    font-family: Newsreader, Georgia, ui-serif, serif;
+    font-family: Poppins, ui-sans-serif, system-ui, sans-serif;
   }
 
   .eyebrow {

@@ -14,7 +14,7 @@
     -->
     <div
       id="chart"
-      class="relative flex min-h-[280px] flex-col items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white p-4 text-center sm:p-6"
+      class="relative flex min-h-[420px] flex-col items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white p-4 text-center sm:min-h-[520px] sm:p-6"
     >
       <p class="text-4xl">{{ emoji }}</p>
       <p class="max-w-md text-sm text-slate-600 break-words">
