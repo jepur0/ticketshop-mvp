@@ -232,10 +232,12 @@ export async function readEvents(): Promise<any[]> {
     .all<{ data: string }>('SELECT data FROM events ORDER BY slug')
     .map((r) => {
       const e = JSON.parse(r.data)
+      const poster = String(e.posterImage || '')
+      // Uploaded posters are served from SQLite. Explicit admin images must not be
+      // replaced by the seed cache (posterLocked is set when the form saves a picture).
+      if (poster.startsWith('/api/public/posters/') || e.posterLocked) return e
       // Prefer cached local posters under /public/images/events
-      const local = e.posterImage && String(e.posterImage).startsWith('/images/')
-        ? e.posterImage
-        : null
+      const local = poster.startsWith('/images/') ? poster : null
       const remote = e.posterImageRemote || (e.posterImage?.startsWith('http') ? e.posterImage : null)
       if (local && existsSync(join(publicRoot, local.replace(/^\//, '')))) {
         e.posterImage = local
@@ -281,5 +283,22 @@ export async function upsertEvent(e: any) {
     JSON.stringify(e),
     e.active ? 1 : 0
   ])
+  dbApi.persistNow()
+}
+
+export async function readEventById(id: string): Promise<any | null> {
+  await ensureDb()
+  const row = dbApi.get<{ data: string }>('SELECT data FROM events WHERE id = ?', [id])
+  if (!row?.data) return null
+  try {
+    return JSON.parse(row.data)
+  } catch {
+    return null
+  }
+}
+
+export async function deleteEvent(id: string) {
+  await ensureDb()
+  dbApi.run('DELETE FROM events WHERE id = ?', [id])
   dbApi.persistNow()
 }

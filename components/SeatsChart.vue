@@ -144,10 +144,15 @@ async function renderChart() {
         /* ignore */
       }
     }
-    chartInstance = new seatsio.SeatingChart({
+    // Public embed needs the workspace public key and the event key only.
+    // chartKey is not part of this config.
+    const seatingConfig = {
       divId: chartDivId,
       workspaceKey: props.workspaceKey,
-      event: props.eventKey,
+      event: props.eventKey
+    }
+    chartInstance = new seatsio.SeatingChart({
+      ...seatingConfig,
       onObjectSelected: (obj: any) => {
         const seatId = obj.id || obj.label
         const label = obj.labels?.own || obj.label || seatId

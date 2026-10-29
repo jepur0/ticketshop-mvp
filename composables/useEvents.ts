@@ -41,16 +41,34 @@ export function useEvents() {
     return [...new Set(events.value.map((e) => e.city))].sort()
   }
 
-  function upsert(event: EventItem) {
+  async function upsert(
+    event: EventItem,
+    opts?: { throwOnError?: boolean; extra?: Record<string, unknown> }
+  ) {
+    const payload = { ...event, ...(opts?.extra || {}) }
+    const local = { ...payload } as EventItem & { posterUpload?: unknown }
+    delete local.posterUpload
     const idx = events.value.findIndex((e) => e.id === event.id)
     if (idx >= 0) {
-      events.value = events.value.map((e, i) => (i === idx ? event : e))
+      events.value = events.value.map((e, i) => (i === idx ? (local as EventItem) : e))
     } else {
-      events.value = [...events.value, event]
+      events.value = [...events.value, local as EventItem]
     }
-    // Best-effort persist (admin)
-    if (import.meta.client) {
-      $fetch('/api/admin/events', { method: 'PUT', body: event }).catch(() => {})
+    if (!import.meta.client) return
+    try {
+      const res = await $fetch<{ ok: boolean; event?: EventItem; warning?: string }>('/api/admin/events', {
+        method: 'PUT',
+        body: payload
+      })
+      if (res?.event) {
+        const saved = res.event
+        const i = events.value.findIndex((e) => e.id === saved.id)
+        if (i >= 0) events.value = events.value.map((e, n) => (n === i ? saved : e))
+        else events.value = [...events.value, saved]
+      }
+      return res
+    } catch (err) {
+      if (opts?.throwOnError) throw err
     }
   }
 
