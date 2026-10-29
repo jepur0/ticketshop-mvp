@@ -1,20 +1,27 @@
 <template>
-  <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
-    <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50">
-      <p class="text-sm font-semibold text-slate-700">
+  <div
+    class="overflow-hidden border border-line bg-paper-card shadow-soft"
+    :class="expanded ? 'flex h-full flex-col rounded-none border-0 shadow-none' : 'rounded-none sm:rounded-[1.35rem]'"
+  >
+    <div v-if="!expanded" class="flex items-center justify-between border-b border-line bg-paper/80 px-4 py-3 sm:px-5">
+      <p class="text-sm font-semibold text-ink">
         Sitzplan
-        <span v-if="live" class="ml-2 text-xs font-normal text-emerald-600">seats.io live</span>
-        <span v-else class="ml-2 text-xs font-normal text-amber-600">Placeholder</span>
+        <span v-if="live" class="ml-2 text-xs font-normal text-emerald-700">seats.io live</span>
+        <span v-else class="ml-2 text-xs font-normal text-gold-deep">Placeholder</span>
       </p>
-      <span class="text-xs text-slate-400">Hold {{ holdMinutes }} Min.</span>
+      <span class="text-xs text-ink-muted">Hold {{ holdMinutes }} Min.</span>
     </div>
 
     <div v-if="configHint" class="px-4 py-2 text-xs bg-amber-50 text-amber-900 border-b border-amber-100">
       {{ configHint }}
     </div>
 
-    <div v-if="live" class="relative">
-      <div :id="chartDivId" class="min-h-[360px]" />
+    <div v-if="live" class="relative min-h-0 flex-1 bg-white">
+      <div
+        :id="chartDivId"
+        class="w-full"
+        :class="expanded ? 'h-[calc(100dvh-3.5rem)]' : 'h-[520px] sm:h-[640px] lg:h-[720px]'"
+      />
       <div v-if="chartError" class="p-4 text-sm text-red-700 bg-red-50 space-y-2">
         <p class="font-semibold">Sitzplan konnte nicht geladen werden</p>
         <p>{{ chartError }}</p>
@@ -34,7 +41,7 @@
           </button>
         </div>
       </div>
-      <p v-else-if="loading" class="absolute inset-0 flex items-center justify-center text-sm text-slate-400 bg-white/70">
+      <p v-else-if="loading" class="absolute inset-0 flex items-center justify-center bg-white/70 text-sm text-ink-muted">
         Chart wird geladen…
       </p>
     </div>
@@ -60,6 +67,7 @@ const props = defineProps<{
   categories: { id: string; name: string; price: number }[]
   emoji?: string
   holdMinutes?: number
+  expanded?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -198,6 +206,16 @@ watch(
   () => [props.workspaceKey, props.eventKey, props.region],
   () => {
     if (live.value) nextTick(renderChart)
+  }
+)
+
+watch(
+  () => props.expanded,
+  () => {
+    nextTick(() => {
+      window.dispatchEvent(new Event('resize'))
+      chartInstance?.resize?.()
+    })
   }
 )
 

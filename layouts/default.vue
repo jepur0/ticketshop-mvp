@@ -19,8 +19,12 @@
         </nav>
         <div class="flex shrink-0 items-center gap-2">
           <span class="hidden text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted sm:inline">DE</span>
-          <NuxtLink to="/checkout" class="relative btn-secondary !min-h-9 !px-3.5 !py-1.5 text-xs">
-            Warenkorb
+          <NuxtLink to="/checkout" class="relative btn-secondary !min-h-9 !px-3 !py-1.5 text-xs sm:!px-3.5">
+            <svg class="h-4 w-4 sm:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <path d="M6 7h12l-1 12H7L6 7z" />
+              <path d="M9 7a3 3 0 0 1 6 0" />
+            </svg>
+            <span class="hidden sm:inline">Warenkorb</span>
             <span
               v-if="count"
               class="absolute -top-1 right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-night"

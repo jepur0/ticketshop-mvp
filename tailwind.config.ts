@@ -42,8 +42,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Instrument Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Newsreader', 'Georgia', 'ui-serif', 'serif']
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },
       boxShadow: {
         soft: '0 1px 2px rgba(23,21,26,.04), 0 10px 28px rgba(23,21,26,.06)',
