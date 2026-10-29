@@ -20,6 +20,10 @@ export type OrderRecord = {
   }>
   total: number
   fees: number
+  subtotal?: number
+  discount?: number
+  promoCode?: string
+  affiliateRef?: string
   holdIds?: string[]
   seatsHoldToken?: string | null
   emailSentAt?: string | null

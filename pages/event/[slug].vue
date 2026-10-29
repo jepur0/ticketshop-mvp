@@ -139,6 +139,23 @@
       </div>
     </section>
 
+    <div v-if="sponsors.length" class="mx-auto mt-8 max-w-[1600px] px-4">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Sponsoren</p>
+      <div class="mt-3 flex flex-wrap items-center gap-4">
+        <a
+          v-for="s in sponsors"
+          :key="s.id"
+          :href="s.link || undefined"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold"
+        >
+          <img v-if="s.logoUrl" :src="s.logoUrl" alt="" class="h-10 w-10 rounded-lg object-contain" />
+          {{ s.name }}
+        </a>
+      </div>
+    </div>
+
     <div class="mx-auto mt-8 max-w-3xl px-4 xl:max-w-[1600px]">
       <h2 class="font-display text-xl font-semibold">Beschreibung</h2>
       <p class="mt-3 whitespace-pre-line break-words text-base leading-relaxed text-ink-soft">{{ event.description }}</p>
@@ -216,6 +233,18 @@ const { data: integrations } = await useFetch('/api/public/integrations')
 const { data: company } = await useFetch('/api/public/company')
 const holdMinutes = computed(() => (integrations.value as any)?.holdMinutes || 20)
 const expanded = ref(false)
+const sponsors = ref<any[]>([])
+watch(
+  event,
+  async (current) => {
+    if (!current) {
+      sponsors.value = []
+      return
+    }
+    sponsors.value = await $fetch('/api/public/sponsors', { query: { eventId: current.id } }).catch(() => [])
+  },
+  { immediate: true }
+)
 const copied = ref(false)
 
 const eventItems = computed(() => items.value.filter((i) => i.eventId === event.value?.id))

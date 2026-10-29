@@ -1,6 +1,7 @@
 import { requireUser } from '../../utils/auth'
 import { readSettings } from '../../utils/settings'
-import { readOrders } from '../../utils/store'
+import { readEvents, readOrders } from '../../utils/store'
+import { listCatalog } from '../../utils/catalog'
 
 export default defineEventHandler(async (event) => {
   await requireUser(event, ['admin', 'client'])
@@ -39,6 +40,40 @@ export default defineEventHandler(async (event) => {
         createdAt: o.createdAt,
         payment: o.payment
       }
-    })
+    }),
+    clients: await clientPayouts(orders, pct),
+    history: await listCatalog<any>('payouts')
   }
 })
+
+async function clientPayouts(orders: any[], fallbackPct: number) {
+  const events = await readEvents()
+  const byId = new Map(events.map((e: any) => [e.id, e]))
+  const clients = await listCatalog<any>('clients')
+  const history = await listCatalog<any>('payouts')
+  return clients.map((client) => {
+    const sales = orders
+      .filter((o) => {
+        const ev = byId.get(o.eventId)
+        if (ev?.clientId && ev.clientId === client.id) return true
+        return String(ev?.organizer || '').trim().toLowerCase() === String(client.name || '').trim().toLowerCase()
+      })
+      .reduce((s, o) => s + Number(o.total || 0), 0)
+    const feePct = Number(client.feePercent ?? fallbackPct) || 0
+    const fee = Math.round(sales * (feePct / 100) * 100) / 100
+    const owed = Math.round((sales - fee) * 100) / 100
+    const paid = history
+      .filter((p) => p.clientId === client.id)
+      .reduce((s, p) => s + Number(p.amount || 0), 0)
+    return {
+      id: client.id,
+      name: client.name,
+      feePercent: feePct,
+      sales: Math.round(sales * 100) / 100,
+      fee,
+      owed,
+      paid: Math.round(paid * 100) / 100,
+      open: Math.round((owed - paid) * 100) / 100
+    }
+  })
+}

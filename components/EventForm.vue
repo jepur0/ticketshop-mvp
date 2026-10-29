@@ -21,8 +21,12 @@
           <input id="event-city" v-model="form.city" class="input" />
         </div>
         <div class="sm:col-span-2">
-          <label class="label" for="event-venue">Venue</label>
-          <input id="event-venue" v-model="form.venue" class="input" />
+          <label class="label" for="event-place">Venue</label>
+          <select id="event-place" v-model="placePick" class="input" @change="onPlace">
+            <option value="">Freitext</option>
+            <option v-for="p in places" :key="p.id" :value="p.id">{{ p.name }} · {{ p.city }}</option>
+          </select>
+          <input v-if="!placePick" id="event-venue" v-model="form.venue" class="input mt-2" placeholder="Venue" />
         </div>
         <div class="sm:col-span-2">
           <label class="label" for="event-description">Beschreibung</label>
@@ -154,7 +158,11 @@
         <div class="mt-4 grid gap-4 sm:grid-cols-2">
           <div class="sm:col-span-2">
             <label class="label" for="event-organizer">Veranstalter</label>
-            <input id="event-organizer" v-model="form.organizer" class="input" />
+            <select id="event-client" v-model="clientPick" class="input" @change="onClient">
+              <option value="">Freitext</option>
+              <option v-for="c in clients" :key="c.id" :value="c.id">{{ c.name }}</option>
+            </select>
+            <input v-if="!clientPick" id="event-organizer" v-model="form.organizer" class="input mt-2" placeholder="Veranstalter" />
           </div>
           <label class="flex items-center gap-2 text-sm">
             <input v-model="form.active" type="checkbox" />
@@ -218,6 +226,11 @@ const imageLocked = ref(Boolean((props.event as EventItem & { posterLocked?: boo
 const pendingUpload = ref<{ mime: string; base64: string } | null>(null)
 
 const existingPoster = props.event?.posterImage || ''
+const places = ref<any[]>([])
+const clients = ref<any[]>([])
+const placePick = ref('')
+const clientPick = ref('')
+
 const form = reactive({
   id: props.event?.id || `evt-${Date.now().toString(36)}`,
   slug: props.event?.slug || '',
@@ -237,6 +250,31 @@ const form = reactive({
   priceCategories: props.event
     ? props.event.priceCategories.map((c) => ({ ...c }))
     : [{ id: 'cat-std', name: 'Standard', price: 25 }]
+})
+
+function onPlace() {
+  const place = places.value.find((p) => p.id === placePick.value)
+  if (!place) return
+  form.venue = place.name || ''
+  if (place.city) form.city = place.city
+  if (place.seatsEventKey && !form.eventKey) {
+    form.eventKey = place.seatsEventKey
+    ticketMode.value = 'chart'
+  }
+}
+
+function onClient() {
+  const client = clients.value.find((c) => c.id === clientPick.value)
+  if (client) form.organizer = client.name || ''
+}
+
+onMounted(async () => {
+  places.value = await $fetch('/api/admin/records/places').catch(() => [])
+  clients.value = await $fetch('/api/admin/records/clients').catch(() => [])
+  const savedPlace = (props.event as any)?.placeId
+  if (savedPlace && places.value.some((p) => p.id === savedPlace)) placePick.value = savedPlace
+  const savedClient = (props.event as any)?.clientId
+  if (savedClient && clients.value.some((c) => c.id === savedClient)) clientPick.value = savedClient
 })
 
 function addCategory() {
@@ -404,7 +442,11 @@ async function save() {
   }
   saving.value = true
   try {
-    const extra: Record<string, unknown> = { posterLocked: imageLocked.value }
+    const extra: Record<string, unknown> = {
+      posterLocked: imageLocked.value,
+      placeId: placePick.value || '',
+      clientId: clientPick.value || ''
+    }
     if (pendingUpload.value) extra.posterUpload = pendingUpload.value
     const res = await upsert(buildItem(), { throwOnError: true, extra })
     if (res?.warning) {
